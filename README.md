@@ -1,3 +1,5 @@
+<img src="https://github.com/Cosmologist/doctrine-offline-docs/blob/main/www.doctrine-project.org/logos/doctrine-logo-black-text10f3.svg" width="150" height="150">
+
 # Doctrine offline documentation 
 
 Contains documentation of all versions of Doctrine components.  
