@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from www.doctrine-project.org/2010/02/24/doctrine2-versionable.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Sep 2024 17:14:42 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+        <title>A re-usable Versionable Behavior for Doctrine 2 - Doctrine: PHP Open Source Project</title>
+
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="theme-color" content="#ffffff">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <meta name="description" content="The Doctrine Project is an open-source PHP project that is home to home to several PHP libraries primarily focused on database storage and object mapping. The core projects are the Object Relational Mapper (ORM) and the Database Abstraction Layer (DBAL) it is built upon.
+">
+
+        <meta name="keywords" content="php,mysql,orm,dbal,database,mongodb,odm,annotations,migrations,cache,couchdb">
+
+                    <meta name="robots" content="index, follow">
+        
+        
+            <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "NewsArticle",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://www.doctrine-project.org/2010/02/24/doctrine2-versionable.html"
+        },
+        "headline": "A re-usable Versionable Behavior for Doctrine 2",
+        "image": [
+            "https://www.doctrine-project.org/images/og.png"
+        ],
+        "datePublished": "2010-02-24T00:00:00-05:00",
+        "dateModified": "2010-02-24T00:00:00-05:00",
+        "author": {
+            "@type": "Person",
+            "name": "beberlei"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Doctrine",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.doctrine-project.org/images/og.png"
+            }
+        },
+        "description": "NOTE This blog entry relates to an outdated Doctrine 2 Alpha
+:   version. Please see the documentati"
+    }
+    </script>
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="../../../frontend/css/prismjs4f20.css?d2443b"
+                            
+                        
+    />
+
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="../../../frontend/css/index39c8.css?7ed5f2"
+                        
+                        
+        />
+
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+
+        <link rel="apple-touch-icon-precomposed" sizes="57x57" href="../../../images/apple-touch-icon-57x57.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../../images/apple-touch-icon-114x114.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../../images/apple-touch-icon-72x72.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../../images/apple-touch-icon-144x144.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="60x60" href="../../../images/apple-touch-icon-60x60.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="120x120" href="../../../images/apple-touch-icon-120x120.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="76x76" href="../../../images/apple-touch-icon-76x76.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../images/apple-touch-icon-152x152.png" />
+        <link rel="icon" type="image/png" href="../../../images/favicon-196x196.png" sizes="196x196" />
+        <link rel="icon" type="image/png" href="../../../images/favicon-96x96.png" sizes="96x96" />
+        <link rel="icon" type="image/png" href="../../../images/favicon-32x32.png" sizes="32x32" />
+        <link rel="icon" type="image/png" href="../../../images/favicon-16x16.png" sizes="16x16" />
+        <link rel="icon" type="image/png" href="../../../images/favicon-128.png" sizes="128x128" />
+        <meta name="application-name" content="Doctrine"/>
+        <meta name="msapplication-TileColor" content="#FFFFFF" />
+        <meta name="msapplication-TileImage" content="https://www.doctrine-project.org/images/mstile-144x144.png" />
+        <meta name="msapplication-square70x70logo" content="https://www.doctrine-project.org/images/mstile-70x70.png" />
+        <meta name="msapplication-square150x150logo" content="https://www.doctrine-project.org/images/mstile-150x150.png" />
+        <meta name="msapplication-wide310x150logo" content="https://www.doctrine-project.org/images/mstile-310x150.png" />
+        <meta name="msapplication-square310x310logo" content="https://www.doctrine-project.org/images/mstile-310x310.png" />
+
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@doctrineproject" />
+        <meta name="twitter:creator" content="@doctrineproject" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.doctrine-project.org/2010/02/24/doctrine2-versionable.html" />
+        <meta property="og:title" content="A re-usable Versionable Behavior for Doctrine 2 - Doctrine: PHP Open Source Project" />
+        <meta property="og:description" content="The Doctrine Project is an open-source PHP project that is home to home to several PHP libraries primarily focused on database storage and object mapping. The core projects are the Object Relational Mapper (ORM) and the Database Abstraction Layer (DBAL) it is built upon.
+" />
+        <meta property="og:image" content="https://www.doctrine-project.org/images/og.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="1200" />
+
+        <link rel="alternate" type="application/atom+xml" href="../../../atom.xml" title="Doctrine activity feed" />
+
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "url": "https://www.doctrine-project.org",
+            "logo": "https://www.doctrine-project.org/logos/doctrine-logo.svg"
+        }
+        </script>
+
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "url": "https://www.doctrine-project.org",
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://www.doctrine-project.org?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+            }
+        }
+        </script>
+
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Doctrine",
+            "url": "https://www.doctrine-project.org",
+            "sameAs": [
+                "https://twitter.com/doctrineproject"
+            ]
+        }
+        </script>
+
+        
+        
+            </head>
+    <body>
+                    
+            <nav class="doctrine-navbar navbar navbar-expand-lg navbar-dark sticky-top bg-dark flex-md-nowrap">
+                <a class="navbar-brand text-hide" href="../../../index.html"><img src="../../../logos/doctrine-logo2e67.svg?1a5b7c" />Doctrine</a>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="../../../projects.html" id="navbarProjectsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Projects
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarProjectsDropdown">
+                                                                    <a class="dropdown-item" href="../../../projects/coding-standard.html">Coding Standard</a>
+                                                                    <a class="dropdown-item" href="../../../projects/collections.html">Collections</a>
+                                                                    <a class="dropdown-item" href="../../../projects/common.html">Common</a>
+                                                                    <a class="dropdown-item" href="../../../projects/data-fixtures.html">Data fixtures</a>
+                                                                    <a class="dropdown-item" href="../../../projects/dbal.html">DBAL</a>
+                                                                    <a class="dropdown-item" href="../../../projects/event-manager.html">Event Manager</a>
+                                                                    <a class="dropdown-item" href="../../../projects/inflector.html">Inflector</a>
+                                                                    <a class="dropdown-item" href="../../../projects/instantiator.html">Instantiator</a>
+                                                                    <a class="dropdown-item" href="../../../projects/lexer.html">Lexer</a>
+                                                                    <a class="dropdown-item" href="../../../projects/migrations.html">Migrations</a>
+                                                                    <a class="dropdown-item" href="../../../projects/mongodb-odm.html">MongoDB ODM</a>
+                                                                    <a class="dropdown-item" href="../../../projects/orm.html">ORM</a>
+                                                                    <a class="dropdown-item" href="../../../projects/phpcr-odm.html">PHPCR ODM</a>
+                                                                    <a class="dropdown-item" href="../../../projects/persistence.html">Persistence</a>
+                                                                    <a class="dropdown-item" href="../../../projects/rst-parser.html">RST Parser</a>
+                                                                <a class="dropdown-item bg-secondary text-white font-weight-bold" href="../../../projects.html">View All</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="../../../contribute/index.html" id="navbarDevelopmentDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Development</a>
+
+                            <div class="dropdown-menu" aria-labelledby="navbarContributeDropdown">
+                                <a class="dropdown-item" href="../../../community/index.html">Community</a>
+                                <a class="dropdown-item" href="../../../contribute/index.html">Contributor Workflow</a>
+                                <a class="dropdown-item" href="../../../contribute/maintainer/index.html">Maintainer Workflow</a>
+                                <a class="dropdown-item" href="../../../contribute/website/index.html">Contribute to Website</a>
+                                <a class="dropdown-item" href="../../../policies.html">Policies</a>
+                                <a class="dropdown-item" href="https://github.com/doctrine" target="_blank" rel="noopener noreferrer">GitHub</a>
+                                <a class="dropdown-item" href="../../../styleguide.html">Styleguide</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="../../../sponsorship.html">Sponsorship</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="../../../partners.html">Partners</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="../../../blog/index.html">Blog</a>
+                        </li>
+                    </ul>
+
+                    <div class="layout-edit-button d-inline-block mr-2">
+                                                    <a href="https://github.com/doctrine/doctrine-website/edit/master/source/blog/2010-02-24-doctrine2-versionable.md" class="btn btn-light" target="_blank" rel="noopener noreferrer">Edit</a>
+                                            </div>
+                </div>
+                <div class="nav-outbound">
+                    <div id="search-box">
+                        <!-- SearchBox widget will appear here -->
+                    </div>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+            </nav>
+
+            <div class="search-results rounded">
+                <div id="hits">
+                    <!-- Hits widget will appear here -->
+                </div>
+
+                <a href="https://www.algolia.com/" target="_blank" rel="noopener noreferrer"><img src="../../../images/search-by-algolia.png" class="float-right" style="width: 150px;" /></a>
+            </div>
+        
+            <main role="main" class="container-wrapper container">
+            <article>
+        <div class="row">
+            <div class="col-lg-8 col-12">
+                <header>
+                    <h2>A re-usable Versionable Behavior for Doctrine 2</h2>
+                </header>
+
+                <p class="lead">
+                    Posted on <date>February 24, 2010</date>
+                                            by
+                                                    beberlei
+                                                            </p>
+            </div>
+
+            <div class="col-lg-4 col-12">
+                <script async type="text/javascript" src="../../../../cdn.carbonads.com/carbonc118.js?serve=CK7D553W&amp;placement=wwwdoctrine-projectorg" id="_carbonads_js"></script>
+            </div>
+        </div>
+
+        <hr />
+
+        <div>
+                <p><strong>NOTE</strong> This blog entry relates to an outdated Doctrine 2 Alpha
+:   version. Please see the documentation for the most up to date
+behavior. A test-implementation for this behavior is on
+github.com/beberlei/DoctrineExtensions</p>
+<p>My previous post on behaviors in Doctrine 2 generated quite some
+discussion about the difference on behaviours that are re-usable across
+models and the trivial specific implementations I have shown.</p>
+<p>In this post I will show a re-usable versionable (audit-log) behavior.
+For this we will need the following ingredients:</p>
+<ul>
+<li>An interface <code>DoctrineExtensions\Versionable\Versionable</code></li>
+<li>A class <code>DoctrineExtensions\Versionable\VersionManager</code></li>
+<li>An event listener <code>DoctrineExtensions\Versionable\VersionListener</code></li>
+<li>
+<p>A generic entity <code>DoctrineExtensions\Versionable\ResourceVersion</code></p>
+<blockquote>
+<p><strong>NOTE</strong> The Event API is currently in the central focus of our
+efforts so the API shown here may change before the first Beta
+release.</p>
+</blockquote>
+</li>
+</ul>
+<p>The workflow is as follows, each Entity that is supposed to be
+versionable has to implement the interface <code>Versionable</code> which looks
+like this:</p>
+<pre><code class="language-{.sourceCode">&lt;?php
+namespace DoctrineExtensions\Versionable;
+
+interface Versionable
+{
+    /**
+     * @return int
+     */
+    public function getCurrentVersion();
+
+    /**
+     * @return array
+     */
+    public function getVersionedData();
+
+    /**
+     * @return int
+     */
+    public function getResourceId();
+}</code></pre>
+<p>Whenever an entity is persisted or updated the state that is persisted
+will also be logged in an audit table. The state is returned with an
+array of key value pairs in the <code>getVersionedData()</code> and the current
+version has to be the value of the @Version column of the entity.</p>
+<p>To sum up, the requirements of an entity that can be a <code>Versionable</code> in
+this simple implementation:</p>
+<ul>
+<li>Single Integer Primary Key.</li>
+<li>Has to be versioned with an integer column.</li>
+</ul>
+<p>How does such versioned data look like? The generic resource version
+entity looks like this. Its a Doctrine Entity, but in a domain model its
+an immutable value object. It should not be changed after creation.</p>
+<pre><code class="language-{.sourceCode">&lt;?php
+namespace DoctrineExtensions\Versionable;
+
+class ResourceVersion
+{
+    /** @Id @Column(type="integer") */
+    private $id;
+
+    /** @Column(type="string") */
+    private $resourceName;
+
+    /** @Column(type="integer") */
+    private $resourceId;
+
+    /** @Column(type="array") */
+    private $versionedData;
+
+    /**
+     * @Column(type="integer") */
+    private $version;
+
+    /** @Column(type="datetime") */
+    private $snapshotDate;
+
+    public function __construct(Versionable $resource)
+    {
+        $this-&gt;resourceName = get_class($resource);
+        $this-&gt;resourceId = $resource-&gt;getResourceId();
+        $this-&gt;versionedData = $resource-&gt;getVersionedData();
+        $this-&gt;version = $resource-&gt;getCurrentVersion();
+        $this-&gt;snapshotDate = new \DateTime("now");
+    }
+
+    // getters
+}</code></pre>
+<p>Now we need to solve the problem of generating the <code>ResourceVersion</code>
+whenever an <code>Versionable</code> entity is persisted or updated. This can be
+done by using the <a href="../../../projects/doctrine-orm/en/current/reference/events.html">Doctrine EventManager
+API</a>.
+We will implement the <code>EventSubscriber</code> interface and hook into the
+&quot;onFlush&quot; event.</p>
+<pre><code class="language-{.sourceCode">&lt;?php
+namespace DoctrineExtensions\Versionable;
+
+use Doctrine\Common\EventSubscriber,
+    Doctrine\ORM\Events,
+    Doctrine\ORM\Event\OnFlushEventArgs,
+    Doctrine\ORM\EntityManager;
+
+class VersionListener implements EventSubscriber
+{
+    public function getSubscribedEvents()
+    {
+        return array(Events::onFlush);
+    }
+
+    public function onFlush(OnFlushEventArgs $args)
+    {
+        $em = $args-&gt;getEntityManager();
+        $uow = $em-&gt;getUnitOfWork();
+
+        foreach ($uow-&gt;getScheduledEntityInsertions() AS $entity) {
+            if ($entity instanceof Versionable) {
+                $this-&gt;_makeSnapshot($entity);
+            }
+        }
+
+        foreach ($uow-&gt;getScheduledEntityUpdates() AS $entity) {
+            if ($entity instanceof Versionable) {
+                $this-&gt;_makeSnapshot($entity);
+            }
+        }
+    }
+
+    private function _makeSnapshot($entity)
+    {
+        $resourceVersion = new ResourceVersion($entity);
+        $class = $this-&gt;_em-&gt;getClassMetadata(get_class($resourceVersion));
+
+        $this-&gt;_em-&gt;persist( $resourceVersion );
+        $this-&gt;_em-&gt;getUnitOfWork()-&gt;computeChangeSet($class, $resourceVersion);
+    }
+}</code></pre>
+<p>How do we hook this <code>VersionListener</code> into the EntityManager? We will
+wrap the VersionManager around it that handles registration and offers
+some convenience methods to retrieve the versions of a resource.</p>
+<pre><code class="language-{.sourceCode">&lt;?php
+namespace DoctrineExtensions\Versionable;
+
+use Doctrine\ORM\EntityManager;
+
+class VersionManager
+{
+    private $_em;
+
+    public function __construct(EntityManager $em)
+    {
+        $this-&gt;_em = $em;
+        $this-&gt;_em-&gt;getEventManager()-&gt;addEventSubscriber(
+            new VersionListener()
+        );
+    }
+
+    public function getVersions(Versionable $resource)
+    {
+        $query = $this-&gt;_em-&gt;createQuery(
+            "SELECT v FROM DoctrineExtensions\Versionable\ResourceVersion v INDEX BY v.version ".
+            "WHERE v.resourceName = ?1 AND v.resourceId = ?2 ORDER BY v.version DESC");
+        $query-&gt;setParameter(1, get_class($resource));
+        $query-&gt;setParameter(2, $resource-&gt;getResourceId());
+
+        return $query-&gt;getResult();
+    }
+}</code></pre>
+<p>Now using this to retrieve all the versions of a given entity that is
+versionable you would go and:</p>
+<pre><code class="language-{.sourceCode">&lt;?php
+// $em EntityManager, $blogPost my Blog Post
+
+$versionManager = new VersionManager($em);
+$versions = $versionManager-&gt;getVersions($blogPost);
+
+echo "Old Title: ".$versions[$oldVersionNum]-&gt;getVersionedData('title');
+
+// Create a new version
+$blogPost-&gt;setTitle("My very new title");
+$em-&gt;flush();</code></pre>
+<p>This is a first example of how to use the powerful Doctrine 2 Event API.
+It is certainly not easy to use, as you need to understand the inner
+workings of the UnitOfWork and the different steps it is in during the
+flush process. However you can generate huge benefits in reusability.</p>
+<p>The versionable behaviour could be extended by the following features:</p>
+<ul>
+<li>Create a new interface <code>Revertable</code> that extends <code>Versionable</code> and
+add a method <code>revert(Revertable $resource, $toVersion)</code> to the
+<code>VersionManager</code> that handles the retrieval, invoking of revert and
+such.</li>
+<li>Create a new interface Diffable with a method diff(\$aVersion,
+\$bVersion) and new method diff(Diffable \$resource, \$aId, \$bId)
+to the VersionManager that handles the delegation of a difference
+computation between two versions to the Diffable implementor.</li>
+</ul>
+<p>Another approach would be not to save the complete state of an entity
+during the flush operation, but only the fields that changed. This is
+generally called an <em>AuditLog</em>. We could add an <code>Auditable</code> interface
+much in the same manner than the <code>Versionable</code> and retrieve the
+ChangeSets of each entity during flush using the following event
+listener:</p>
+<pre><code class="language-{.sourceCode">&lt;?php
+class AuditListener implements EventSubscriber
+{
+    public function getSubscribedEvents()
+    {
+        return array(Events::onFlush);
+    }
+
+    public function onFlush(OnFlushEventArgs $args)
+    {
+        $em = $args-&gt;getEntityManager();
+        $uow = $em-&gt;getUnitOfWork();
+
+        $changeDate = new DateTime("now");
+        $class = $em-&gt;getClassMetadata('DoctrineExtensions\Auditable\AuditEntry');
+
+        foreach ($uow-&gt;getScheduledEntityUpdates() AS $entity) {
+            if ($entity instanceof Auditable) {
+                $changeSet = $uow-&gt;getEntityChangeSet($entity);
+
+                foreach ($changeSet AS $field =&gt; $vals) {
+                    list($oldValue, $newValue) = $vals;
+                    $audit = new AuditEntry(
+                        $entity-&gt;getResourceName(),
+                        $entity-&gt;getId(),
+                        $oldValue,
+                        $newValue,
+                        $changeDate
+                    );
+
+                    $em-&gt;persist($audit);
+                    $em-&gt;getUnitOfWork()
+                       -&gt;computeChangeSet($class, $audit);
+                }
+            }
+        }
+    }
+}</code></pre>
+<p>This approach can also be re-used or combined with several similiar
+behaviours, like Taggable, Blamable, Commentable.</p>
+        </div>
+    </article>
+    </main>
+
+        <button id="back-to-top" title="Go to top">Top</button>
+
+                
+        <script id="instantsearch-template" type="text/template">
+            
+    <a href="{{url}}" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{{_highlightResult.projectName.value}}}: {{{_highlightResult.h1.value}}}</h5>
+        </div>
+
+        {{#h2}}
+            <p class="mb-1">
+                <i class="far fa-arrow-alt-circle-right text-primary"></i>
+
+                {{{_highlightResult.h2.value}}}
+
+                {{#h3}}
+                    > {{{_highlightResult.h3.value}}}
+                {{/h3}}
+
+                {{#h4}}
+                    > {{{_highlightResult.h4.value}}}
+                {{/h4}}
+
+                {{#h5}}
+                    > {{{_highlightResult.h5.value}}}
+                {{/h5}}
+            </p>
+        {{/h2}}
+
+        {{#content}}
+            <div class="content p-2 rounded" style="background-color: rgba(0,0,0,.125);">
+                {{{_highlightResult.content.value}}}
+            </div>
+        {{/content}}
+    </a>
+
+        </script>
+
+        <script
+            src="../../../frontend/js/bundle622f.js?ff3b61"
+                            
+                        >
+        </script>
+
+                
+        <script type="text/javascript">
+            var projectSlug = '';
+            var versionSlug = 'latest';
+
+            var searchBoxSettings = {
+                container: '#search-box',
+                placeholder: 'Search'
+            };
+
+            function googleAnalyticsEvent(eventCategory, eventAction, eventLabel, eventValue, fieldsObject) {
+                                ga('send', 'event', eventCategory, eventAction, eventLabel, eventValue, fieldsObject);
+                            }
+        </script>
+
+        
+                    <script type="text/javascript">
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','../../../../www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-288343-7', 'auto');
+                ga('send', 'pageview');
+            </script>
+        
+            <script
+            src="../../../frontend/js/prismjs1a47.js?0b6349"
+                            
+                        >
+    </script>
+    </body>
+
+<!-- Mirrored from www.doctrine-project.org/2010/02/24/doctrine2-versionable.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Sep 2024 17:14:42 GMT -->
+</html>

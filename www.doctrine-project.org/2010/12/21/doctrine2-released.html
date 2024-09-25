@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from www.doctrine-project.org/2010/12/21/doctrine2-released.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Sep 2024 17:14:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+        <title>Doctrine 2 First Stable Release - Doctrine: PHP Open Source Project</title>
+
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="theme-color" content="#ffffff">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <meta name="description" content="The Doctrine Project is an open-source PHP project that is home to home to several PHP libraries primarily focused on database storage and object mapping. The core projects are the Object Relational Mapper (ORM) and the Database Abstraction Layer (DBAL) it is built upon.
+">
+
+        <meta name="keywords" content="php,mysql,orm,dbal,database,mongodb,odm,annotations,migrations,cache,couchdb">
+
+                    <meta name="robots" content="index, follow">
+        
+        
+            <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "NewsArticle",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://www.doctrine-project.org/2010/12/21/doctrine2-released.html"
+        },
+        "headline": "Doctrine 2 First Stable Release",
+        "image": [
+            "https://www.doctrine-project.org/images/og.png"
+        ],
+        "datePublished": "2010-12-21T00:00:00-05:00",
+        "dateModified": "2010-12-21T00:00:00-05:00",
+        "author": {
+            "@type": "Person",
+            "name": "beberlei"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Doctrine",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.doctrine-project.org/images/og.png"
+            }
+        },
+        "description": "We are happy to announce the immediate release of the first stable
+Doctrine 2.0 version. This releas"
+    }
+    </script>
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="../../../frontend/css/prismjs4f20.css?d2443b"
+                            
+                        
+    />
+
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="../../../frontend/css/index39c8.css?7ed5f2"
+                        
+                        
+        />
+
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+
+        <link rel="apple-touch-icon-precomposed" sizes="57x57" href="../../../images/apple-touch-icon-57x57.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../../images/apple-touch-icon-114x114.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../../images/apple-touch-icon-72x72.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../../images/apple-touch-icon-144x144.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="60x60" href="../../../images/apple-touch-icon-60x60.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="120x120" href="../../../images/apple-touch-icon-120x120.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="76x76" href="../../../images/apple-touch-icon-76x76.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../images/apple-touch-icon-152x152.png" />
+        <link rel="icon" type="image/png" href="../../../images/favicon-196x196.png" sizes="196x196" />
+        <link rel="icon" type="image/png" href="../../../images/favicon-96x96.png" sizes="96x96" />
+        <link rel="icon" type="image/png" href="../../../images/favicon-32x32.png" sizes="32x32" />
+        <link rel="icon" type="image/png" href="../../../images/favicon-16x16.png" sizes="16x16" />
+        <link rel="icon" type="image/png" href="../../../images/favicon-128.png" sizes="128x128" />
+        <meta name="application-name" content="Doctrine"/>
+        <meta name="msapplication-TileColor" content="#FFFFFF" />
+        <meta name="msapplication-TileImage" content="https://www.doctrine-project.org/images/mstile-144x144.png" />
+        <meta name="msapplication-square70x70logo" content="https://www.doctrine-project.org/images/mstile-70x70.png" />
+        <meta name="msapplication-square150x150logo" content="https://www.doctrine-project.org/images/mstile-150x150.png" />
+        <meta name="msapplication-wide310x150logo" content="https://www.doctrine-project.org/images/mstile-310x150.png" />
+        <meta name="msapplication-square310x310logo" content="https://www.doctrine-project.org/images/mstile-310x310.png" />
+
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@doctrineproject" />
+        <meta name="twitter:creator" content="@doctrineproject" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.doctrine-project.org/2010/12/21/doctrine2-released.html" />
+        <meta property="og:title" content="Doctrine 2 First Stable Release - Doctrine: PHP Open Source Project" />
+        <meta property="og:description" content="The Doctrine Project is an open-source PHP project that is home to home to several PHP libraries primarily focused on database storage and object mapping. The core projects are the Object Relational Mapper (ORM) and the Database Abstraction Layer (DBAL) it is built upon.
+" />
+        <meta property="og:image" content="https://www.doctrine-project.org/images/og.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="1200" />
+
+        <link rel="alternate" type="application/atom+xml" href="../../../atom.xml" title="Doctrine activity feed" />
+
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "url": "https://www.doctrine-project.org",
+            "logo": "https://www.doctrine-project.org/logos/doctrine-logo.svg"
+        }
+        </script>
+
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "url": "https://www.doctrine-project.org",
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://www.doctrine-project.org?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+            }
+        }
+        </script>
+
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Doctrine",
+            "url": "https://www.doctrine-project.org",
+            "sameAs": [
+                "https://twitter.com/doctrineproject"
+            ]
+        }
+        </script>
+
+        
+        
+            </head>
+    <body>
+                    
+            <nav class="doctrine-navbar navbar navbar-expand-lg navbar-dark sticky-top bg-dark flex-md-nowrap">
+                <a class="navbar-brand text-hide" href="../../../index.html"><img src="../../../logos/doctrine-logo2e67.svg?1a5b7c" />Doctrine</a>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="../../../projects.html" id="navbarProjectsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Projects
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarProjectsDropdown">
+                                                                    <a class="dropdown-item" href="../../../projects/coding-standard.html">Coding Standard</a>
+                                                                    <a class="dropdown-item" href="../../../projects/collections.html">Collections</a>
+                                                                    <a class="dropdown-item" href="../../../projects/common.html">Common</a>
+                                                                    <a class="dropdown-item" href="../../../projects/data-fixtures.html">Data fixtures</a>
+                                                                    <a class="dropdown-item" href="../../../projects/dbal.html">DBAL</a>
+                                                                    <a class="dropdown-item" href="../../../projects/event-manager.html">Event Manager</a>
+                                                                    <a class="dropdown-item" href="../../../projects/inflector.html">Inflector</a>
+                                                                    <a class="dropdown-item" href="../../../projects/instantiator.html">Instantiator</a>
+                                                                    <a class="dropdown-item" href="../../../projects/lexer.html">Lexer</a>
+                                                                    <a class="dropdown-item" href="../../../projects/migrations.html">Migrations</a>
+                                                                    <a class="dropdown-item" href="../../../projects/mongodb-odm.html">MongoDB ODM</a>
+                                                                    <a class="dropdown-item" href="../../../projects/orm.html">ORM</a>
+                                                                    <a class="dropdown-item" href="../../../projects/phpcr-odm.html">PHPCR ODM</a>
+                                                                    <a class="dropdown-item" href="../../../projects/persistence.html">Persistence</a>
+                                                                    <a class="dropdown-item" href="../../../projects/rst-parser.html">RST Parser</a>
+                                                                <a class="dropdown-item bg-secondary text-white font-weight-bold" href="../../../projects.html">View All</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="../../../contribute/index.html" id="navbarDevelopmentDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Development</a>
+
+                            <div class="dropdown-menu" aria-labelledby="navbarContributeDropdown">
+                                <a class="dropdown-item" href="../../../community/index.html">Community</a>
+                                <a class="dropdown-item" href="../../../contribute/index.html">Contributor Workflow</a>
+                                <a class="dropdown-item" href="../../../contribute/maintainer/index.html">Maintainer Workflow</a>
+                                <a class="dropdown-item" href="../../../contribute/website/index.html">Contribute to Website</a>
+                                <a class="dropdown-item" href="../../../policies.html">Policies</a>
+                                <a class="dropdown-item" href="https://github.com/doctrine" target="_blank" rel="noopener noreferrer">GitHub</a>
+                                <a class="dropdown-item" href="../../../styleguide.html">Styleguide</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="../../../sponsorship.html">Sponsorship</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="../../../partners.html">Partners</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="../../../blog/index.html">Blog</a>
+                        </li>
+                    </ul>
+
+                    <div class="layout-edit-button d-inline-block mr-2">
+                                                    <a href="https://github.com/doctrine/doctrine-website/edit/master/source/blog/2010-12-21-doctrine2-released.md" class="btn btn-light" target="_blank" rel="noopener noreferrer">Edit</a>
+                                            </div>
+                </div>
+                <div class="nav-outbound">
+                    <div id="search-box">
+                        <!-- SearchBox widget will appear here -->
+                    </div>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+            </nav>
+
+            <div class="search-results rounded">
+                <div id="hits">
+                    <!-- Hits widget will appear here -->
+                </div>
+
+                <a href="https://www.algolia.com/" target="_blank" rel="noopener noreferrer"><img src="../../../images/search-by-algolia.png" class="float-right" style="width: 150px;" /></a>
+            </div>
+        
+            <main role="main" class="container-wrapper container">
+            <article>
+        <div class="row">
+            <div class="col-lg-8 col-12">
+                <header>
+                    <h2>Doctrine 2 First Stable Release</h2>
+                </header>
+
+                <p class="lead">
+                    Posted on <date>December 21, 2010</date>
+                                            by
+                                                    beberlei
+                                                            </p>
+            </div>
+
+            <div class="col-lg-4 col-12">
+                <script async type="text/javascript" src="../../../../cdn.carbonads.com/carbonc118.js?serve=CK7D553W&amp;placement=wwwdoctrine-projectorg" id="_carbonads_js"></script>
+            </div>
+        </div>
+
+        <hr />
+
+        <div>
+                <p>We are happy to announce the immediate release of the first stable
+Doctrine 2.0 version. This release marks the end of 2.5 years of
+dedicated development starting in early 2008 and ending as a christmas
+present to our users. We wish everyone a merry christmas!</p>
+<p>During the last years a core team of five people contributed large parts
+of the code and many developers contributed small patches and features.
+In the end the Doctrine 1 code was refactored beyond recognition,
+replacing the original ActiveRecord Doctrine 1 with a new DataMapper
+implementation. We want to thank all the contributors and early adopters
+for all the feedback and discussions.</p>
+<h1>What is new in Doctrine 2?</h1>
+<ul>
+<li>DQL is now a real language inside Doctrine, based on an EBNF that is
+parsed and transformed to SQL. Benefits of this refactoring are
+readable error messages, the generation of an AST that allows us to
+support many different vendors and powerful hooks for developers to
+modify and extend the DQL language to their needs. DQL can either be
+written as a string or be generated using a powerful QueryBuilder
+object.</li>
+<li>Your persistent objects (called entities in Doctrine 2) are not
+required to extend an abstract base class anymore. Doctrine 2 allows
+you to use Plain old PHP Objects.</li>
+<li>The UnitOfWork is not an alibi-pattern as implemented in Doctrine 1.
+It is the most central pattern in Doctrine 2. Instead of calling
+<code>save()</code> or <code>delete()</code> methods on your <code>Doctrine_Record</code> instances
+you now pass objects to the data mapper object called
+<code>EntityManager</code> and it keeps track of all changes until you request
+a synchronisation between database and the current objects in
+memory. This process is very efficient and has consistent semantics.
+This is a significant improvement over Doctrine 1 in terms of
+performance and developer ease-of-use.</li>
+<li>There are no code-generation steps from YAML to PHP involved in the
+library anymore. YAML, XML, PHP and Doc-Block Annotations are four
+first-class citizens for defining the metadata mapping between
+objects and database. A powerful caching layer allows Doctrine 2 to
+use runtime metadata without relying on code-generation.</li>
+<li>A clean architecture and powerful algorithms make Doctrine 2
+magnitudes faster than Doctrine 1.</li>
+<li>Doctrine 2 supports an API that allows you to transform an arbitrary
+SQL statements into an object-structure. This feature is used by the
+Doctrine Query Language itself and is a first-class citizen of the
+library. It essentially allows you to make use of powerful
+vendor-specific features and complex SQL statements without having
+to cirumvent the ORM completely.</li>
+<li>Inheritance is not akward anymore. There are now three different
+types of inheritance to choose from: Mapped Superclasses,
+Single-Table- and Joined-Table-Inheritance.</li>
+<li>Many more features, just see the reference guide on what is possible
+with Doctrine 2.</li>
+</ul>
+<h1>Why did we take so long to develop this new major release?</h1>
+<p>There are several reasons:</p>
+<p>The refactoring of the original Doctrine 1 code marks a paradigm shift
+in how we approach object persistence in PHP. Making use of PHP 5.3 only
+features we could write an ORM whose internals are much more powerful
+than the first version of Doctrine. This meant rewriting lots of
+features from scratch and refactoring other code beyond recognition.
+Many features were carefully implemented and have been discussed for
+weeks or month in our team. We feel that not a single feature in this
+release can be called a hack or has negative architectural implications
+along the road.</p>
+<p>As a user an ORM means committing yourself to a library that you haven't
+written yourself and trust it to handle your most important code: The
+business and domain logic. We wanted to release a high quality library
+and make sure it has no bugs when it is released. This explains why the
+first alpha was already released over a year ago and we have been fixing
+every little bug that appeared for the last 14 months. When you download
+Doctrine 2 now we feel this code is more stable and much more
+maintainable than Doctrine 1. The ORM itself has about 1000 tests where
+half of these are functional tests that successfully run against all the
+supported database vendors MySQL, SQLite, PostgreSQL, Oracle and MSSQL.
+The database access layer and common libraries come with an additional
+400 tests.</p>
+<p>We wanted the release to ship with a complete and well-thought-out
+documentation. Writing such a documentation takes time. The current
+documentation is probably not perfect, but it contains a very detailed
+reference guide and a small tutorial to get started. Additionally there
+is a cookbook with several recipes that you can use with your Doctrine 2
+project.</p>
+<p>While Doctrine 1 had pretty powerful SQL abstraction we felt there were
+better libraries out there that could be incoporated into Doctrine 2.
+The new database abstraction layer of Doctrine 2 is much more powerful
+than the Doctrine 1 DBAL and is powered by code from other great
+libraries such as Zeta Components, Zend Framework and PEAR MDB2. On top
+of this it can also be used standalone, you can use the DBAL without
+having to use the ORM.</p>
+<h1>Dropping Features of Doctrine 1</h1>
+<p>But Doctrine 2 is not only a new version of Doctrine 1. We also dropped
+a lot of features that we find inappropriate for the core of an ORM
+library:</p>
+<ul>
+<li>Validators have been dropped. Use a framework library like Zend or
+Symfony for validator support, they ship much more powerful
+validators than Doctrine 1 ever had. If you don't like frameworks
+there is ext/filter to consider.</li>
+<li>We killed the magic features: Doctrine 2 does not offer behaviors as
+a core feature anymore. We came to the conclusion that behaviors in
+the core lead to the big ball of mud called Doctrine
+<ol>
+<li>The code is nearly unmaintainable because of all the special
+logic and magic that works everywhere. That is why Doctrine 2
+focuses on being a consistent and extensible object-relational
+mapper only and behaviors should be released as extensions on top of
+Doctrine 2. While this approach was questioned by many of the
+Doctrine 1 users we think this is the right approach. We are already
+seeing third party libraries and extensions like Doctrator based on
+Doctrine 2 that implement these features.</li>
+</ol></li>
+<li>Explicit multiple connection support has been dropped. Use multiple
+instances of <code>Doctrine\DBAL\Connection</code> or
+<code>Doctrine\ORM\EntityManager</code>. Doctrine 2 uses no global state that
+could affect the usage of multiple instances.</li>
+</ul>
+<h1>Is Doctrine 2 backwards compatible?</h1>
+<p>No it is not. Doctrine 1 and 2 have nothing in common. For what its
+worth they only share the same project name. You cannot simply move from
+your Doctrine 1.2 to a Doctrine 2 project. Why didn't we release a
+backwards compatible ORM? Because we think Doctrine 1 has architectural
+flaws that cannot be fixed.</p>
+<h1>What is the plan for Doctrine 2 beyond this release?</h1>
+<p>With the core that is now Doctrine 2 we plan to keep the library
+backwards compatible at all times. Not only for minor and mini-releases
+such as 2.0.1 or 2.1, even for potential releases of a Doctrine 3 or 4
+version we plan to avoid public API refactorings as much as possible. If
+however we feel that there is overwhelming evidence that a public API
+refactoring makes the ORM faster and leads to more maintainable code we
+will not hesitate to break API for a 3.0 release.</p>
+<p>This approach comes at costs that we are willing to pay. All new
+features have to pass a requirements discussion and pros/cons are
+carefully weighted against each other. That is also why we try to expose
+as little of our internals as possible. This certainly hurts
+extensibility of Doctrine 2, but with our expected quality level and
+review process we hope to bring the costs of this approach down. You
+should never be forced to extend Doctrine 2 just to fix bugs, which is
+the most important reason for extensibility in other PHP libraries.</p>
+<h1>Where do I start?</h1>
+<p>You can download Doctrine 2 <a href="../../../projects/orm/download.html">from our downloads
+section</a> ,
+<a href="http://pear.doctrine-project.org/">install it via PEAR</a> or find it in
+the <a href="https://github.com/doctrine/orm">Github repository</a>. Symfony 2
+also ships with a current version of Doctrine 2. After you installed
+Doctrine 2 you can <a href="../../../docs/orm/2.0/en/index.html">go to the
+documentation</a> and
+start reading the reference guide or <a href="../../../docs/orm/2.0/en/tutorials/getting-started-xml-edition.html">the
+tutorial</a>.</p>
+<p>If you find any bugs or have feature requests you should check our
+<a href="../../../jira.html">Bug-Tracker and report bugs or feature
+requests</a>. If you want to discuss
+about Doctrine 2 you can either <a href="../../../community/index-2.html">use the Google Group or join the
+#doctrine channel on the Freenode IRC
+Network</a>. Also make sure to
+check the current <a href="../../../docs/orm/2.0/en/reference/limitations-and-known-issues.html">Limitations and Known Issues
+section</a>
+in the docs. We are trying to be honest about what Doctrine 2 can and
+can't do but might do in the future.</p>
+        </div>
+    </article>
+    </main>
+
+        <button id="back-to-top" title="Go to top">Top</button>
+
+                
+        <script id="instantsearch-template" type="text/template">
+            
+    <a href="{{url}}" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{{_highlightResult.projectName.value}}}: {{{_highlightResult.h1.value}}}</h5>
+        </div>
+
+        {{#h2}}
+            <p class="mb-1">
+                <i class="far fa-arrow-alt-circle-right text-primary"></i>
+
+                {{{_highlightResult.h2.value}}}
+
+                {{#h3}}
+                    > {{{_highlightResult.h3.value}}}
+                {{/h3}}
+
+                {{#h4}}
+                    > {{{_highlightResult.h4.value}}}
+                {{/h4}}
+
+                {{#h5}}
+                    > {{{_highlightResult.h5.value}}}
+                {{/h5}}
+            </p>
+        {{/h2}}
+
+        {{#content}}
+            <div class="content p-2 rounded" style="background-color: rgba(0,0,0,.125);">
+                {{{_highlightResult.content.value}}}
+            </div>
+        {{/content}}
+    </a>
+
+        </script>
+
+        <script
+            src="../../../frontend/js/bundle622f.js?ff3b61"
+                            
+                        >
+        </script>
+
+                
+        <script type="text/javascript">
+            var projectSlug = '';
+            var versionSlug = 'latest';
+
+            var searchBoxSettings = {
+                container: '#search-box',
+                placeholder: 'Search'
+            };
+
+            function googleAnalyticsEvent(eventCategory, eventAction, eventLabel, eventValue, fieldsObject) {
+                                ga('send', 'event', eventCategory, eventAction, eventLabel, eventValue, fieldsObject);
+                            }
+        </script>
+
+        
+                    <script type="text/javascript">
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','../../../../www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-288343-7', 'auto');
+                ga('send', 'pageview');
+            </script>
+        
+            <script
+            src="../../../frontend/js/prismjs1a47.js?0b6349"
+                            
+                        >
+    </script>
+    </body>
+
+<!-- Mirrored from www.doctrine-project.org/2010/12/21/doctrine2-released.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Sep 2024 17:14:29 GMT -->
+</html>

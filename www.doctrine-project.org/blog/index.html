@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from www.doctrine-project.org/blog/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Sep 2024 16:45:23 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+        <title>Blog - Doctrine: PHP Open Source Project</title>
+
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="theme-color" content="#ffffff">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <meta name="description" content="The Doctrine Project is an open-source PHP project that is home to home to several PHP libraries primarily focused on database storage and object mapping. The core projects are the Object Relational Mapper (ORM) and the Database Abstraction Layer (DBAL) it is built upon.
+">
+
+        <meta name="keywords" content="php,mysql,orm,dbal,database,mongodb,odm,annotations,migrations,cache,couchdb">
+
+                    <meta name="robots" content="index, follow">
+        
+        
+            <link
+            rel="stylesheet"
+            type="text/css"
+            href="../frontend/css/prismjs4f20.css?d2443b"
+                            
+                        
+    />
+
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="../frontend/css/index39c8.css?7ed5f2"
+                        
+                        
+        />
+
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+
+        <link rel="apple-touch-icon-precomposed" sizes="57x57" href="../images/apple-touch-icon-57x57.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../images/apple-touch-icon-114x114.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../images/apple-touch-icon-72x72.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../images/apple-touch-icon-144x144.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="60x60" href="../images/apple-touch-icon-60x60.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="120x120" href="../images/apple-touch-icon-120x120.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="76x76" href="../images/apple-touch-icon-76x76.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../images/apple-touch-icon-152x152.png" />
+        <link rel="icon" type="image/png" href="../images/favicon-196x196.png" sizes="196x196" />
+        <link rel="icon" type="image/png" href="../images/favicon-96x96.png" sizes="96x96" />
+        <link rel="icon" type="image/png" href="../images/favicon-32x32.png" sizes="32x32" />
+        <link rel="icon" type="image/png" href="../images/favicon-16x16.png" sizes="16x16" />
+        <link rel="icon" type="image/png" href="../images/favicon-128.png" sizes="128x128" />
+        <meta name="application-name" content="Doctrine"/>
+        <meta name="msapplication-TileColor" content="#FFFFFF" />
+        <meta name="msapplication-TileImage" content="../images/mstile-144x144.png" />
+        <meta name="msapplication-square70x70logo" content="../images/mstile-70x70.png" />
+        <meta name="msapplication-square150x150logo" content="../images/mstile-150x150.png" />
+        <meta name="msapplication-wide310x150logo" content="../images/mstile-310x150.png" />
+        <meta name="msapplication-square310x310logo" content="../images/mstile-310x310.png" />
+
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@doctrineproject" />
+        <meta name="twitter:creator" content="@doctrineproject" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="index.html" />
+        <meta property="og:title" content="Blog - Doctrine: PHP Open Source Project" />
+        <meta property="og:description" content="The Doctrine Project is an open-source PHP project that is home to home to several PHP libraries primarily focused on database storage and object mapping. The core projects are the Object Relational Mapper (ORM) and the Database Abstraction Layer (DBAL) it is built upon.
+" />
+        <meta property="og:image" content="../images/og.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="1200" />
+
+        <link rel="alternate" type="application/atom+xml" href="../atom.xml" title="Doctrine activity feed" />
+
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "url": "https://www.doctrine-project.org",
+            "logo": "https://www.doctrine-project.org/logos/doctrine-logo.svg"
+        }
+        </script>
+
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "url": "https://www.doctrine-project.org",
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://www.doctrine-project.org?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+            }
+        }
+        </script>
+
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Doctrine",
+            "url": "https://www.doctrine-project.org",
+            "sameAs": [
+                "https://twitter.com/doctrineproject"
+            ]
+        }
+        </script>
+
+        
+        
+            </head>
+    <body>
+                    
+            <nav class="doctrine-navbar navbar navbar-expand-lg navbar-dark sticky-top bg-dark flex-md-nowrap">
+                <a class="navbar-brand text-hide" href="../index.html"><img src="../logos/doctrine-logo2e67.svg?1a5b7c" />Doctrine</a>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="../projects.html" id="navbarProjectsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Projects
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarProjectsDropdown">
+                                                                    <a class="dropdown-item" href="../projects/coding-standard.html">Coding Standard</a>
+                                                                    <a class="dropdown-item" href="../projects/collections.html">Collections</a>
+                                                                    <a class="dropdown-item" href="../projects/common.html">Common</a>
+                                                                    <a class="dropdown-item" href="../projects/data-fixtures.html">Data fixtures</a>
+                                                                    <a class="dropdown-item" href="../projects/dbal.html">DBAL</a>
+                                                                    <a class="dropdown-item" href="../projects/event-manager.html">Event Manager</a>
+                                                                    <a class="dropdown-item" href="../projects/inflector.html">Inflector</a>
+                                                                    <a class="dropdown-item" href="../projects/instantiator.html">Instantiator</a>
+                                                                    <a class="dropdown-item" href="../projects/lexer.html">Lexer</a>
+                                                                    <a class="dropdown-item" href="../projects/migrations.html">Migrations</a>
+                                                                    <a class="dropdown-item" href="../projects/mongodb-odm.html">MongoDB ODM</a>
+                                                                    <a class="dropdown-item" href="../projects/orm.html">ORM</a>
+                                                                    <a class="dropdown-item" href="../projects/phpcr-odm.html">PHPCR ODM</a>
+                                                                    <a class="dropdown-item" href="../projects/persistence.html">Persistence</a>
+                                                                    <a class="dropdown-item" href="../projects/rst-parser.html">RST Parser</a>
+                                                                <a class="dropdown-item bg-secondary text-white font-weight-bold" href="../projects.html">View All</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="../contribute/index.html" id="navbarDevelopmentDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Development</a>
+
+                            <div class="dropdown-menu" aria-labelledby="navbarContributeDropdown">
+                                <a class="dropdown-item" href="../community/index.html">Community</a>
+                                <a class="dropdown-item" href="../contribute/index.html">Contributor Workflow</a>
+                                <a class="dropdown-item" href="../contribute/maintainer/index.html">Maintainer Workflow</a>
+                                <a class="dropdown-item" href="../contribute/website/index.html">Contribute to Website</a>
+                                <a class="dropdown-item" href="../policies.html">Policies</a>
+                                <a class="dropdown-item" href="https://github.com/doctrine" target="_blank" rel="noopener noreferrer">GitHub</a>
+                                <a class="dropdown-item" href="../styleguide.html">Styleguide</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="../sponsorship.html">Sponsorship</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="../partners.html">Partners</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="index.html">Blog</a>
+                        </li>
+                    </ul>
+
+                    <div class="layout-edit-button d-inline-block mr-2">
+                                                    <a href="https://github.com/doctrine/doctrine-website/edit/master/source/blog.html" class="btn btn-light" target="_blank" rel="noopener noreferrer">Edit</a>
+                                            </div>
+                </div>
+                <div class="nav-outbound">
+                    <div id="search-box">
+                        <!-- SearchBox widget will appear here -->
+                    </div>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+            </nav>
+
+            <div class="search-results rounded">
+                <div id="hits">
+                    <!-- Hits widget will appear here -->
+                </div>
+
+                <a href="https://www.algolia.com/" target="_blank" rel="noopener noreferrer"><img src="../images/search-by-algolia.png" class="float-right" style="width: 150px;" /></a>
+            </div>
+        
+            <main role="main" class="container-wrapper container">
+                        <article>
+        <header>
+            <h2><a href="../2024/08/16/the-skeletons-are-now-out-of-the-closet.html">The skeletons are now out of the closet - So long, Skeleton-Mapper</a></h2>
+        </header>
+
+        <p class="lead">
+            Posted on <date>August 16, 2024</date>
+                            by
+                                    <a href="../cdn-cgi/l/email-protection.html#7d1e111c081914123d19121e090f141318500d0f1217181e0953120f1a">Claudio Zizza</a>
+                                    </p>
+
+        <hr />
+
+        <div>
+            <p>While Doctrine ORM and DBAL have a main focus in our daily development, a deeper look
+into their dependencies show, that Doctrine has much more projects at hand than just the
+database-related ones. Some projects even weren't created for ORM or DBAL, just like
+our Skeleton-Mapper.</p>
+<p>The <a href="https://github.com/doctrine/skeleton-mapper">Skeleton-Mapper project</a> won't be maintained anymore because of
+its lack of usage nowadays and is now an archived repository. The Doctrine Skeleton-Mapper
+was an object mapper where you are responsible for implementing the object mapping of the
+persistence operations. This means you write plain old PHP code for the data repositories,
+object repositories, object hydrators and object persisters. A lot of freedom but also a lot
+of work for a developer, including its maintenance for us.</p>
+<p>Some projects grow and others become obsolete after some time, which are 9 years in
+the case of our Skeleton-Mapper. We also want to express our gratitude to
+<a href="https://github.com/doctrine/skeleton-mapper/graphs/contributors">the contributors</a>
+and maintainers who kept this project alive for so long. Thank you.</p>
+        </div>
+    </article>
+    <article>
+        <header>
+            <h2><a href="../2024/07/09/doctrine-core-team-meetup.html">Doctrine Core Team Meetup 2024 in Bonn, Germany</a></h2>
+        </header>
+
+        <p class="lead">
+            Posted on <date>July 9, 2024</date>
+                            by
+                                    <a href="../cdn-cgi/l/email-protection.html#f79c989983969c83b795929592859b929ed99392">Benjamin Eberlei</a>
+                                    </p>
+
+        <hr />
+
+        <div>
+            <p>We are organizing another Doctrine Core Team Meetup in Bonn, Germany from Tuesday,
+8.10.2024 to Thursday, 10.10.2024 at the offices of one of our
+sponsors Tideways GmbH.</p>
+<p>The goal is to get the current team together, discuss and work on Doctrine DBAL, ORM and ODM.</p>
+<p>We thank all of our GitHub and OpenCollective sponsors for making this possible.</p>
+        </div>
+    </article>
+    <article>
+        <header>
+            <h2><a href="../2024/02/03/doctrine-orm-3-and-dbal-4-released.html">Doctrine ORM 3 and DBAL 4 Released</a></h2>
+        </header>
+
+        <p class="lead">
+            Posted on <date>February 3, 2024</date>
+                            by
+                                    <a href="../cdn-cgi/l/email-protection.html#600a1701070520040f031412090e054d10120f0a0503144e0f1207">Jonathan H. Wage</a>
+                                    </p>
+
+        <hr />
+
+        <div>
+            <p>We are thrilled to announce the release of Doctrine ORM 3.0 and DBAL 4.0.
+These releases are the culmination of over a decade of hard work across
+dozens of contributors and the Doctrine maintainers.</p>
+<h2>What's New</h2>
+<p><strong>A Slimmer, More Efficient ORM</strong>: The new Doctrine ORM 3.0 comes in at
+326KB, down from 400KB in ORM 2.18.0. This reduction not only makes the
+ORM lighter but also signals our efforts to streamline and optimize every
+aspect of our library and focus our maintenance efforts on the core functionality
+of an ORM and less on tooling and helpers that are only useful by a small number
+of our users.</p>
+<p><strong>Enhanced Code Quality and Coverage</strong>: With ORM 3.0, we've pushed our
+code coverage from 84% to 89%. For DBAL 4.0, we've pushed our code coverage
+from 86% to 94%. This improvement underscores our commitment to reliability
+and the stability of the Doctrine ecosystem, ensuring that your applications
+run smoothly.</p>
+<p><strong>Leaner Dependencies</strong>: In Doctrine ORM 3.0, we have finally eliminated
+dependencies on <code>doctrine/cache</code> and <code>doctrine/common</code>. This change reduces
+complexity and improves maintainability of Doctrine as we now depend on
+<a href="https://www.php-fig.org/psr/psr-6/">PSR-6: Caching Interface</a> for our
+caching responsibilities. Implementing a PSR means we are more interoperable
+with other frameworks and easier to use by a broader amount of users.</p>
+<p><strong>A Growing Community</strong>: The Doctrine project now boasts 1029 contributors
+across all its projects. This vibrant community is the backbone of Doctrine,
+providing valuable insights, feedback, and contributions that drive the
+project forward.</p>
+<h2>Upgrading</h2>
+<p>We understand that upgrading to a new major version can be difficult. The
+best way to upgrade is to first upgrade to the latest Doctrine ORM 2.x and
+DBAL 3.x version and address any deprecation warnings that are reported. You
+can read more about how Doctrine handles deprecations <a href="../policies/deprecation.html">here</a>.
+Once you have addressed all of the deprecations, you should have a clear
+path to upgrade.</p>
+<p>In addition to that, we've maintained comprehensive documentation about
+every change, deprecation and BC break to facilitate a smooth transition
+to ORM 3.0 and DBAL 4.0.</p>
+<ul>
+<li><a href="https://github.com/doctrine/orm/blob/3.0.x/UPGRADE.md">Upgrade to Doctrine ORM 3.0</a></li>
+<li><a href="https://github.com/doctrine/dbal/blob/4.0.x/UPGRADE.md">Upgrade to Doctrine DBAL 4.0</a></li>
+</ul>
+<h2>The Future of Doctrine ORM 2</h2>
+<p>We plan to maintain Doctrine ORM 2 for at least the next 2 years by providing
+bug and security fixes. We may also add or deprecate things in 2.x to improve
+the existing forward-compatbility layer to make the transition to ORM 3 smoother.</p>
+<h2>Looking Forward</h2>
+<p>ORM 3 and DBAL 4 are a big step forward towards modernizing the API of our
+libraries, increasing safety with the use of scalar types in the code base,
+better error handling and generally cleaning up the code to make it easier
+to maintain. We look forward to continuing work on Doctrine and focusing on
+being the most stable and reliable PHP database persistence related libraries
+available.</p>
+        </div>
+    </article>
+    <article>
+        <header>
+            <h2><a href="../2024/01/30/archiving-unmaintained-packages.html">Archiving Unmaintained Packages</a></h2>
+        </header>
+
+        <p class="lead">
+            Posted on <date>January 30, 2024</date>
+                            by
+                                    <a href="../cdn-cgi/l/email-protection.html#61000d020004141221050e021513080f044c11130e0b0402154f0e1306">Andreas Braun</a>
+                                    </p>
+
+        <hr />
+
+        <div>
+            <p>After long consideration, we have decided to archive a number of repositories that have not seen any activity in a
+while. This affects the CouchDB and OrientDB ODMs and their respective libraries, as well as the KeyValueStore project.
+The following repositories and composer packages are affected:</p>
+<ul>
+<li><a href="https://github.com/doctrine/couchdb-client">doctrine/couchdb</a></li>
+<li><a href="https://github.com/doctrine/couchdb-odm">doctrine/couchdb-odm</a></li>
+<li><a href="https://github.com/doctrine/DoctrineCouchDBBundle">doctrine/couchdb-odm-bundle</a></li>
+<li><a href="https://github.com/doctrine/orientdb-odm">doctrine/orientdb-odm</a></li>
+<li><a href="https://github.com/doctrine/KeyValueStore">doctrine/key-value-store</a></li>
+</ul>
+<p>The composer packages will remain available and installable, but we will not be making any bug fixes or security fixes
+in the affected libraries. If you or your business depends on one of these libraries, please fork them and maintain them
+yourself in the future.</p>
+        </div>
+    </article>
+    <article>
+        <header>
+            <h2><a href="../2023/10/11/orm3-beta1-dbal4-rc1-future-plans.html">ORM 3.0 Beta 1, DBAL 4 RC 1 and future plans</a></h2>
+        </header>
+
+        <p class="lead">
+            Posted on <date>October 11, 2023</date>
+                            by
+                                    <a href="../cdn-cgi/l/email-protection.html#4b2024253f2a203f0b292e292e39272e22652f2e">Benjamin Eberlei</a>
+                                    </p>
+
+        <hr />
+
+        <div>
+            <p>We have released the <a href="https://github.com/doctrine/orm/releases/tag/3.0.0-beta1">first beta of the long awaited Doctrine ORM
+3</a> and a <a href="https://github.com/doctrine/dbal/releases/tag/4.0.0-RC1">release
+candidate of DBAL 4</a>. </p>
+<p>The target audience for these releases are framework integration and extension
+library authors. ORM 3 is not yet production ready and the APIs may change.</p>
+<p>Our goal is to release ORM 3.0 as soon as possible and to gather feedback from
+greenfield project authors first. </p>
+<p>This beta release is the result of a lot of work by many contributors,
+especially Grégoire, Alexander, Claudio and Matthias on ORM, Sergei and
+Alexander on DBAL.  To iron out the final details, we met in Düsseldorf for a
+Doctrine Core Team meeting, generously funded by our sponsors through
+OpenCollective and GitHub. We also welcomed Matthias as the latest member of
+the Doctrine Core Team.</p>
+<h3>Continued ORM 2 support and forward compatibility</h3>
+<p>We will maintain the latest branch of the 2 line in ORM for at least another 2
+years, possibly longer, to give you enough time to upgrade and us more time to
+learn from upgrader feedback and improve forward compatibility.</p>
+<p>This means that we will be making ORM 2.x work with newer versions of PHP,
+fixing security bugs, and introducing layers and features that help with
+forward compatibility in the upgrade path to ORM 3. </p>
+<p>Current users of ORM 2 should note that there is no urgency right now to update
+to ORM 3, as we are still working on replacement APIs and forward
+compatibility, and do not intend to ship them all with ORM 3.0, but with later
+versions.</p>
+<h3>ORM 2 users can already prepare for 3 by addressing deprecations</h3>
+<p>But there is already work to be done as an ORM 2 user: to help you find all the
+places where things may be deprecated or changing behaviour, we have created
+<a href="https://github.com/doctrine/deprecations#usage-from-consumer-perspective">the doctrine/deprecations
+library</a>
+and integrated it heavily into DBAL, ORM and other components.</p>
+<p>It allows the use of deprecated behaviour to be logged at runtime with low
+overhead, automatic suppression of the same deprecation occurring multiple
+times, and a way to ignore selected deprecations for the time being. Each
+deprecation message always links to a GitHub issue with more details.</p>
+<p>Many deprecated features have no replacement, such as Mapping Exporters,
+Generate Mapping from Database, Named Queries. </p>
+<p>For some of the deprecations in ORM, we are still planning replacement APIs,
+especially:</p>
+<ul>
+<li>There is currently no way to limit the number of entities that the flush
+operation considers changed. Flush will currently always calculate change
+sets on all entities that are not read-only. </li>
+<li>As a replacement for removing PARTIAL object hydration, we are looking at
+making embeddable objects lazy, perhaps improving nesting of the new DTO
+expression in DQL. We are also looking to introduce subselect or batch
+loading for collections for more efficient multi-level hydration.</li>
+</ul>
+<p>These will be released in 2.x as forward compatible APIs so that you can switch
+to using them before upgrading to ORM 3.</p>
+        </div>
+    </article>
+    <article>
+        <header>
+            <h2><a href="../2023/08/21/doctrine-orm-team-meetup.html">Doctrine ORM Team Meetup in Bonn, Germany</a></h2>
+        </header>
+
+        <p class="lead">
+            Posted on <date>August 21, 2023</date>
+                            by
+                                    <a href="../cdn-cgi/l/email-protection.html#c5aeaaabb1a4aeb185a7a0a7a0b7a9a0aceba1a0">Benjamin Eberlei</a>
+                                    </p>
+
+        <hr />
+
+        <div>
+            <p>We are organizing a Doctrine ORM Core Team Meetup in Düsseldorf, Germany from Monday,
+9.10.2023 to Wednesday, 11.10.2023 at the offices of one of our primary
+sponsors Tideways GmbH.</p>
+<p>The goal is to get the current team together, discuss and work on the missing
+pieces for the long-awaited Doctrine ORM 3.0 release that is planned for later
+this year.</p>
+        </div>
+    </article>
+    <article>
+        <header>
+            <h2><a href="../2022/11/04/annotations-to-attributes.html">From annotations to attributes</a></h2>
+        </header>
+
+        <p class="lead">
+            Posted on <date>November 4, 2022</date>
+                            by
+                                    <a href="../cdn-cgi/l/email-protection.html#6b1b04181f060a181f0e192b0c190e0c5b02190e450d19">Grégoire Paris</a>
+                                    </p>
+
+        <hr />
+
+        <div>
+            <p>Last month, we migrated the tests of the ORM from annotations to attributes.
+Let us look back on what lead to this moment.</p>
+<h2>Annotations</h2>
+<p>Let's go 22 years back in time. In October 2000, Ulf Wendel introduces phpdoc
+comments at the PHP-Kongress. These comments follow a structure that allows
+to produce API documentation from them. They are inspired by javadoc.</p>
+<p>In 2002, Alex Buckley, a Specification lead for the Java language publishes
+<a href="https://www.cs.ubc.ca/~gregor/teaching/cpsc411/metadata-public-draft.html">JSR-175</a>, thus proposing to add user-defined annotations to the
+language, allowing to tag language elements with extra information. 2 years
+later, it gets approved and Java 1.5, also known as Java 5 is released, <a href="https://docs.oracle.com/javase/1.5.0/docs/guide/language/annotations.html">with
+support for annotations</a>.</p>
+<p>4 more years elapse and in 2006, Jano Suchal publishes <a href="https://github.com/jsuchal/addendum">Addendum</a>, a
+PHP library that adds support for using &quot;Docblock/JavaDoc&quot; as annotations,
+meaning that contrary to what is done in Java, Addendum annotations are
+contained inside phpdoc comments, like this:</p>
+<pre><code class="language-php">/** @test */
+function test_it_throws_on_invalid_argument(): void
+{}</code></pre>
+<p>That is because they are implemented in userland, without requiring a change in
+PHP itself.</p>
+<p>Doctrine ORM 2.0 is not released yet at that point, but <a href="https://github.com/doctrine/orm/commit/bcf0110249978c8fc705916d5a4f94216bb98b07">the library is used to
+build an annotation driver</a> in Doctrine 2 in early 2009.
+At that time, Doctrine was a project in a single repository, with <code>Common</code>,
+<code>DBAL</code> and <code>ORM</code> as top-level namespaces.
+<a href="https://github.com/doctrine/orm/commit/9075f10bf5da3058f6ef82ff08e4783ff70424a4">Addendum is replaced 6 months later</a>, with a new namespace
+under <code>Common</code> called <code>Annotations</code>.</p>
+<p>In the summer of 2010, Guilherme Blanco and Pierrick Charron submit
+<a href="https://wiki.php.net/rfc/annotations">an RFC to add annotations support to PHP</a>, but it
+<a href="https://externals.io/message/49733">gets declined</a>. The RFC already mentions the
+need for annotations in PHPUnit, Symfony, Zend Framework, FLOW3 and of course,
+Doctrine.</p>
+<p>Late 2010, Doctrine 2 is tagged, and the single repository is split into 3
+repositories.</p>
+<p>Finally, in 2013, the namespace above is isolated in its own repository, and
+<code>doctrine/annotations</code> 1.0.0 is tagged.</p>
+<p>Today, the package is widely used in the PHP ecosystem and has a little short
+of 300 million downloads on Packagist, and is depended on by over 2 thousand
+packages, including major frameworks and tools. It is fair to say annotations
+have proven valuable to many users.</p>
+<h2>Attributes</h2>
+<p>The RFC mentioned above is only one among <a href="https://wiki.php.net/rfc">many</a>. As mentioned
+before, annotations were implemented as phpdoc comments, which has several
+drawbacks:</p>
+<ul>
+<li>The comments are necessary to run the code, and <a href="https://www.php.net/manual/en/opcache.configuration.php#ini.opcache.save-comments">need to be kept in the
+opcode cache</a>.</li>
+<li>They are obtained at runtime, by using the reflection API, and because of
+that, can only be detected as invalid at runtime.</li>
+<li>They are not well supported by IDEs if at all.</li>
+<li>They clutter comments, which were originally intended for humans.</li>
+<li>They can be confused with phpdoc, which are something else entirely.</li>
+</ul>
+<p>In March 2020, Benjamin Eberlei resurrects <a href="https://wiki.php.net/rfc/attributes">Dmitry Stogov's attributes
+RFC</a> and submits <a href="https://wiki.php.net/rfc/attributes_v2">the seventh RFC on this
+topic</a>, introducing attributes to PHP.</p>
+<p>A few rounds of RFCs about syntax later, PHP 8.0 is released, with a notable
+feature missing: nested attributes. PHP 8.0 attributes use a syntax that is
+forward-compatible with them though, and finally, with PHP 8.1, nested
+attributes are supported.</p>
+<h2>Migrating from one to the other</h2>
+<p>Since attributes are much better than annotations, with <code>doctrine/orm</code> 3.0,
+annotations will no longer be supported, which means applications using them as
+a way to map entities to tables need to migrate towards attributes (or another
+driver).
+As maintainers of that library, even we needed to migrate: most of the test
+suite of <code>doctrine/orm</code> used annotations.</p>
+<p>Enter <a href="https://github.com/rectorphp/rector">Rector</a>. Rector is a standalone tool that is invaluable when it
+comes to performing such migrations: it is able to understand PHP code and
+apply so-called Rectors to it. It is extensible, so it is possible to define
+such Rectors in order to address upgrades for anything, including Doctrine.</p>
+<p>What's more, it comes with batteries included: when you install
+<code>rector/rector</code>, what you get is code from <code>rector/rector-src</code> <em>and</em> its official
+extensions, among which you will find <a href="https://github.com/rectorphp/rector-doctrine"><code>rector/rector-doctrine</code></a>.
+That's right, there is already an entire extension dedicated to Doctrine.</p>
+<p>Rules are grouped together in sets, and the set that interests us here is
+<code>Rector\Doctrine\Set\DoctrineSetList::ANNOTATIONS_TO_ATTRIBUTES</code>.</p>
+<p>To migrate <code>doctrine/orm</code>'s test suite to annotations, here is how we
+proceeded:</p>
+<ol>
+<li>Install Rector: <code>composer require --dev rector/rector</code>.</li>
+<li>
+<p>Create a file called <code>rector.php</code> at the root of the library with the
+following contents:</p>
+<pre><code class="language-php">    &lt;?php
+
+    declare(strict_types=1);
+
+    use Rector\Config\RectorConfig;
+    use Rector\Doctrine\Set\DoctrineSetList;
+
+    return function (RectorConfig $rectorConfig): void {
+        $rectorConfig-&gt;paths([
+            __DIR__ . '/tests',
+        ]);
+        $rectorConfig-&gt;sets([
+            DoctrineSetList::ANNOTATIONS_TO_ATTRIBUTES,
+        ]);
+    };</code></pre>
+</li>
+<li>Run <code>vendor/bin/rector</code>, which obeys the above configuration.</li>
+<li>Uninstall Rector: <code>composer remove rector/rector &amp;&amp; rm rector.php</code></li>
+<li>Run <code>vendor/bin/phpcbf</code> to make the migrated codebase compliant with our
+coding standard.</li>
+</ol>
+<p>Or at least, it was the plan, because some annotations were not perfectly
+migrated. All in all, I found only <a href="https://github.com/rectorphp/rector/issues/7528">2</a> <a href="https://github.com/rectorphp/rector-src/pull/2988">bugs</a>, which looks great
+given how so many edge cases should appear in our test suite.</p>
+<p>I went on and reported those 2 bugs, and this is where the experience went from
+great to stellar:
+the issue template leads to <a href="https://getrector.org/demo">a playground</a>, much like the one you can
+find for other tools such as Psalm or PHPStan.</p>
+<p>This one comes with 2 buttons: &quot;Create an issue&quot;, which pre-fills the Github
+issue with useful information, and &quot;Create a test&quot;, that lets you create a test
+in the right directory (and also, the right repository, which is
+<code>rectorphp/rector-src</code>, and not <code>rectorphp/rector</code>).</p>
+<p>If you want to add a new test for the bug you reported, you should let
+<a href="https://github.com/rectorphp/rector/blob/main/docs/how_to_add_test_for_rector_rule.md">the official tutorial</a> walk you through that, it is very
+well written.</p>
+<p>Anyway, now that these 2 bugs are fixed and you know how to migrate, plan that
+migration, and let us know how it goes! Happy Rectoring!</p>
+        </div>
+    </article>
+    <article>
+        <header>
+            <h2><a href="../2022/08/06/dbal-3.4.0.html">New Release: Doctrine DBAL 3.4.0</a></h2>
+        </header>
+
+        <p class="lead">
+            Posted on <date>August 6, 2022</date>
+                            by
+                                    <a href="../cdn-cgi/l/email-protection.html#660b0914091c09102612131248041f">Sergei Morozov</a>
+                                    </p>
+
+        <hr />
+
+        <div>
+            <p>Doctrine is proud to announce the release of Doctrine DBAL 3.4.0. Below is a summary of the most noteworthy changes
+in the new release:</p>
+<h2>Database schema introspection optimization (<a href="https://github.com/doctrine/dbal/pull/5268">#5268</a>)</h2>
+<p>Older DBAL versions, in order to introspect database schema, performed a set of queries for each table individually.
+This caused noticeable performance issues on some platforms like Oracle which seemingly rebuild their internal views
+for each such query.</p>
+<p>As of this release, the entire schema is introspected in a fixed number of queries. The more tables the schema contains,
+the more noticeable this optimization should be.</p>
+<p>It was impossible to make these optimizations while using the schema introspection platform methods
+(e.g. <code>getListTableColumnsSQL()</code>). As a result, although these methods are kept in the codebase for backward
+compatibility, the DBAL itself no longer uses them. The SQL queries used for schema introspection are no longer
+considered part of the public DBAL API.</p>
+<h2>Support for foreign key constraints on SQLite (<a href="https://github.com/doctrine/dbal/pull/5427">#5427</a>)</h2>
+<p>Although SQLite has supported foreign key constraints since its earliest versions, their support in the DBAL
+was quite limited. One of the reasons for that was that managing foreign key constraints in SQLite is quite different
+from the rest of the supported platforms.</p>
+<p>For example, when a foreign key constraint is declared, platforms like MySQL require that the referenced table
+must already exist. To support creating tables with mutually referencing constraints, the DBAL would
+create the tables first and create the constraints via <code>ALTER TABLE … ADD FOREIGN KEY …</code>.</p>
+<p>This approach doesn't work with SQLite since it doesn't allow adding constraints to an existing table. Fortunately,
+it doesn't require the referenced table to exist at the time of creating the foreign key either.</p>
+<p>The new DBAL release introduces a new API for building <code>CREATE TABLE</code> and <code>DROP TABLE</code> statements for multiple tables
+which could be tailored to the requirements of a given platform. The <code>AbstractPlatform::supportsForeignKeys()</code> method
+is now deprecated since the DBAL supports foreign key constraints on all supported platforms.</p>
+<h2>Support for TEXT/BLOB default values on MariaDB (<a href="https://github.com/doctrine/dbal/pull/5332">#5332</a>)</h2>
+<p>The platform layer in the DBAL is organized in the way that the code implementing the support for MySQL is also
+used to support MariaDB. As a result, even though MariaDB may support certain features the DBAL doesn't support them
+because they are not supported by MySQL. One of such features is the default values for TEXT and BLOB columns.</p>
+<p>As of the new release, the default TEXT and BLOB values are supported on MariaDB but are still unsupported on MySQL,
+even though MySQL supports them as of
+release <a href="https://dev.mysql.com/doc/relnotes/mysql/8.0/en/news-8-0-13.html#mysqld-8-0-13-data-types">8.0.13</a>.</p>
+<h2>Support for result caching in QueryBuilder (<a href="https://github.com/doctrine/dbal/pull/5539">#5539</a>)</h2>
+<p>The recently added <code>enableResultCache()</code> method of the <code>QueryBuilder</code> class allows specifying the query cache profile
+to be used for performing the queries built by the builder.</p>
+<h2>PHP 7.4 or newer is required (<a href="https://github.com/doctrine/dbal/pull/5459">#5459</a>)</h2>
+<p>The DBAL no longer supports PHP 7.3 since its support by the community ended last year. The codebase now
+actively uses such features of PHP 7.4 as
+<a href="https://wiki.php.net/rfc/covariant-returns-and-contravariant-parameters">covariant return types</a>
+and <a href="https://wiki.php.net/rfc/typed_properties_v2">typed properties</a>.</p>
+<h2>Deprecations</h2>
+<p>In light of the DBAL 4 release planned for later this year, the 3.4.0 release introduces over 30 deprecations which,
+as usual, focus on cleaning up obsolete features and making the API more robust and clearer from the
+static analysis standpoint.</p>
+<p>To learn more about upgrading your application, see the
+<a href="https://github.com/doctrine/dbal/blob/3.4.0/UPGRADE.md#upgrade-to-34">upgrade notes</a>. You can find the full
+list of changes in the release <a href="https://github.com/doctrine/dbal/milestone/107">milestone</a>.</p>
+        </div>
+    </article>
+    <article>
+        <header>
+            <h2><a href="../2022/03/24/opencollective.html">On Doctrine Sponsoring with the help of OpenCollective</a></h2>
+        </header>
+
+        <p class="lead">
+            Posted on <date>March 24, 2022</date>
+                            by
+                                    <a href="../cdn-cgi/l/email-protection.html#f19a9e9f85909a85b193949394839d9498df9594">Benjamin Eberlei</a>
+                                    </p>
+
+        <hr />
+
+        <div>
+            <p>To simplify our own administrative burden, we have decided to move over the
+funds to <a href="https://opencollective.com/doctrine">OpenCollective</a>, primarily
+motivated by the success and positive experience of the new PHP Foundation.</p>
+<p>We have started raising money for the Doctrine Project in 2019 through Patreon and
+Github Sponsors to support the project. It was planned to organize core team
+get-togethers/hackathons, but due to the pandemic we haven't been able to do this.
+In addition the legal and tax implications of raising money also caused us
+some headaches. </p>
+<p>The move to OpenCollective will allow us to delegate much of the administrative
+work to them for a small percentage of the raised capital. The fee is a much
+smaller amount than the taxes that we had to pay on the raised money
+previously, so it is a win-win for us.</p>
+<p>We want to assure our sponsors that we still plan to make use of the funds
+to further the Doctrine project and we are actively looking to increase our funding
+for these goals:</p>
+<ul>
+<li>
+<p>Regularly organize hackathons for Doctrine Core team contributors, including
+3-4 days of accommodation, food and travel for roughly 10-15 people.</p>
+</li>
+<li>
+<p>Infrastructure, servers and hosting.</p>
+</li>
+<li>
+<p>Marketing material such as stickers, t-shirts and other small things.</p>
+</li>
+<li>
+<p>If the budget increases significantly we might be able to pay someone part-
+or full-time to do maintenance work such as responding to and processing
+issues, prepare for new PHP releases and general cleanups of the codebase.</p>
+</li>
+</ul>
+<p>As such we hope to convince you to sponsor Doctrine through either our <a href="https://github.com/sponsors/doctrine/">Github
+Sponsors</a> or
+<a href="https://opencollective.com/doctrine">OpenCollective</a> directly.</p>
+        </div>
+    </article>
+    <article>
+        <header>
+            <h2><a href="../2022/01/22/sunsetting-dbal-2.html">Sunsetting Doctrine DBAL 2</a></h2>
+        </header>
+
+        <p class="lead">
+            Posted on <date>January 22, 2022</date>
+                            by
+                                    <a href="../cdn-cgi/l/email-protection.html#670a0815081d08112713121349051e">Sergei Morozov</a>
+                                    </p>
+
+        <hr />
+
+        <div>
+            <p>Since the release of <a href="https://github.com/doctrine/dbal/releases/tag/3.0.0">Doctrine DBAL 3.0.0 </a> in November 2020,
+the 2.x release series effectively went into the maintenance mode. In the past year, we've been accepting mostly
+the following types of patches for DBAL 2:</p>
+<ol>
+<li>Development dependency updates</li>
+<li>Security fixes</li>
+<li>Improvements to compatibility with PHP 8.1</li>
+<li>Improvements in the upgrade path to DBAL 3</li>
+</ol>
+<p>Except for dependency updates, at the moment, there are no known issues in DBAL 2 that would fall into any of
+the above categories.</p>
+<p>Many projects that depend on Doctrine DBAL depend on it indirectly via Doctrine ORM which until
+<a href="https://github.com/doctrine/orm/releases/tag/2.10.0">release 2.10.0</a> didn't support DBAL 3.
+It was one of the blockers of the DBAL 3 adoption which is no longer the case.</p>
+<p>With all that said, the DBAL team announces the plan for sunsetting DBAL 2 in 6 months as of the ORM 2.10.0 release
+which is April 3, 2022. After that date, we plan to release DBAL 2 only to address security related
+and other critical issues for at most a year.</p>
+<p>All Doctrine DBAL users are encouraged to upgrade to the latest stable version
+which is <a href="https://github.com/doctrine/dbal/releases/tag/3.3.0">3.3.0</a> as of the time of this writing.</p>
+<p>For migrating from DBAL 2 to 3, see our two blog posts on DBAL 2.13 Forward Compatibility Layer:</p>
+<ul>
+<li><a href="../2021/03/29/dbal-2.13.html">New Release: Doctrine DBAL 2.13 with Deprecations and Forward Compatibility</a></li>
+<li><a href="../2021/04/19/dbal-2.13.1-3.1.0.html">New Release: Doctrine DBAL 2.13.1 and 3.1.0 with important Forward Compatibility fix</a></li>
+</ul>
+        </div>
+    </article>
+
+<a href="archive.html" class="btn btn-primary">View Blog Archive</a>
+            </main>
+
+        <button id="back-to-top" title="Go to top">Top</button>
+
+                
+        <script data-cfasync="false" src="../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script id="instantsearch-template" type="text/template">
+            
+    <a href="{{url}}" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{{_highlightResult.projectName.value}}}: {{{_highlightResult.h1.value}}}</h5>
+        </div>
+
+        {{#h2}}
+            <p class="mb-1">
+                <i class="far fa-arrow-alt-circle-right text-primary"></i>
+
+                {{{_highlightResult.h2.value}}}
+
+                {{#h3}}
+                    > {{{_highlightResult.h3.value}}}
+                {{/h3}}
+
+                {{#h4}}
+                    > {{{_highlightResult.h4.value}}}
+                {{/h4}}
+
+                {{#h5}}
+                    > {{{_highlightResult.h5.value}}}
+                {{/h5}}
+            </p>
+        {{/h2}}
+
+        {{#content}}
+            <div class="content p-2 rounded" style="background-color: rgba(0,0,0,.125);">
+                {{{_highlightResult.content.value}}}
+            </div>
+        {{/content}}
+    </a>
+
+        </script>
+
+        <script
+            src="../frontend/js/bundle622f.js?ff3b61"
+                            
+                        >
+        </script>
+
+                
+        <script type="text/javascript">
+            var projectSlug = '';
+            var versionSlug = 'latest';
+
+            var searchBoxSettings = {
+                container: '#search-box',
+                placeholder: 'Search'
+            };
+
+            function googleAnalyticsEvent(eventCategory, eventAction, eventLabel, eventValue, fieldsObject) {
+                                ga('send', 'event', eventCategory, eventAction, eventLabel, eventValue, fieldsObject);
+                            }
+        </script>
+
+        
+                    <script type="text/javascript">
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-288343-7', 'auto');
+                ga('send', 'pageview');
+            </script>
+        
+            <script
+            src="../frontend/js/prismjs1a47.js?0b6349"
+                            
+                        >
+    </script>
+    </body>
+
+<!-- Mirrored from www.doctrine-project.org/blog/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Sep 2024 16:45:24 GMT -->
+</html>

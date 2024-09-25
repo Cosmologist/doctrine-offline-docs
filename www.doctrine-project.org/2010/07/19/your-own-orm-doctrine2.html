@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from www.doctrine-project.org/2010/07/19/your-own-orm-doctrine2.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Sep 2024 17:14:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+        <title>Write your own ORM on top of Doctrine2 - Doctrine: PHP Open Source Project</title>
+
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="theme-color" content="#ffffff">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <meta name="description" content="The Doctrine Project is an open-source PHP project that is home to home to several PHP libraries primarily focused on database storage and object mapping. The core projects are the Object Relational Mapper (ORM) and the Database Abstraction Layer (DBAL) it is built upon.
+">
+
+        <meta name="keywords" content="php,mysql,orm,dbal,database,mongodb,odm,annotations,migrations,cache,couchdb">
+
+                    <meta name="robots" content="index, follow">
+        
+        
+            <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "NewsArticle",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://www.doctrine-project.org/2010/07/19/your-own-orm-doctrine2.html"
+        },
+        "headline": "Write your own ORM on top of Doctrine2",
+        "image": [
+            "https://www.doctrine-project.org/images/og.png"
+        ],
+        "datePublished": "2010-07-19T00:00:00-04:00",
+        "dateModified": "2010-07-19T00:00:00-04:00",
+        "author": {
+            "@type": "Person",
+            "name": "beberlei"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Doctrine",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.doctrine-project.org/images/og.png"
+            }
+        },
+        "description": "NOTE
+
+The Doctrine ActiveEntity Extension is just an experiment, nothing
+that will be developed much"
+    }
+    </script>
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="../../../frontend/css/prismjs4f20.css?d2443b"
+                            
+                        
+    />
+
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="../../../frontend/css/index39c8.css?7ed5f2"
+                        
+                        
+        />
+
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+
+        <link rel="apple-touch-icon-precomposed" sizes="57x57" href="../../../images/apple-touch-icon-57x57.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../../images/apple-touch-icon-114x114.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../../images/apple-touch-icon-72x72.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../../images/apple-touch-icon-144x144.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="60x60" href="../../../images/apple-touch-icon-60x60.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="120x120" href="../../../images/apple-touch-icon-120x120.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="76x76" href="../../../images/apple-touch-icon-76x76.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../images/apple-touch-icon-152x152.png" />
+        <link rel="icon" type="image/png" href="../../../images/favicon-196x196.png" sizes="196x196" />
+        <link rel="icon" type="image/png" href="../../../images/favicon-96x96.png" sizes="96x96" />
+        <link rel="icon" type="image/png" href="../../../images/favicon-32x32.png" sizes="32x32" />
+        <link rel="icon" type="image/png" href="../../../images/favicon-16x16.png" sizes="16x16" />
+        <link rel="icon" type="image/png" href="../../../images/favicon-128.png" sizes="128x128" />
+        <meta name="application-name" content="Doctrine"/>
+        <meta name="msapplication-TileColor" content="#FFFFFF" />
+        <meta name="msapplication-TileImage" content="https://www.doctrine-project.org/images/mstile-144x144.png" />
+        <meta name="msapplication-square70x70logo" content="https://www.doctrine-project.org/images/mstile-70x70.png" />
+        <meta name="msapplication-square150x150logo" content="https://www.doctrine-project.org/images/mstile-150x150.png" />
+        <meta name="msapplication-wide310x150logo" content="https://www.doctrine-project.org/images/mstile-310x150.png" />
+        <meta name="msapplication-square310x310logo" content="https://www.doctrine-project.org/images/mstile-310x310.png" />
+
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@doctrineproject" />
+        <meta name="twitter:creator" content="@doctrineproject" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.doctrine-project.org/2010/07/19/your-own-orm-doctrine2.html" />
+        <meta property="og:title" content="Write your own ORM on top of Doctrine2 - Doctrine: PHP Open Source Project" />
+        <meta property="og:description" content="The Doctrine Project is an open-source PHP project that is home to home to several PHP libraries primarily focused on database storage and object mapping. The core projects are the Object Relational Mapper (ORM) and the Database Abstraction Layer (DBAL) it is built upon.
+" />
+        <meta property="og:image" content="https://www.doctrine-project.org/images/og.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="1200" />
+
+        <link rel="alternate" type="application/atom+xml" href="../../../atom.xml" title="Doctrine activity feed" />
+
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "url": "https://www.doctrine-project.org",
+            "logo": "https://www.doctrine-project.org/logos/doctrine-logo.svg"
+        }
+        </script>
+
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "url": "https://www.doctrine-project.org",
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://www.doctrine-project.org?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+            }
+        }
+        </script>
+
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Doctrine",
+            "url": "https://www.doctrine-project.org",
+            "sameAs": [
+                "https://twitter.com/doctrineproject"
+            ]
+        }
+        </script>
+
+        
+        
+            </head>
+    <body>
+                    
+            <nav class="doctrine-navbar navbar navbar-expand-lg navbar-dark sticky-top bg-dark flex-md-nowrap">
+                <a class="navbar-brand text-hide" href="../../../index.html"><img src="../../../logos/doctrine-logo2e67.svg?1a5b7c" />Doctrine</a>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="../../../projects.html" id="navbarProjectsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Projects
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarProjectsDropdown">
+                                                                    <a class="dropdown-item" href="../../../projects/coding-standard.html">Coding Standard</a>
+                                                                    <a class="dropdown-item" href="../../../projects/collections.html">Collections</a>
+                                                                    <a class="dropdown-item" href="../../../projects/common.html">Common</a>
+                                                                    <a class="dropdown-item" href="../../../projects/data-fixtures.html">Data fixtures</a>
+                                                                    <a class="dropdown-item" href="../../../projects/dbal.html">DBAL</a>
+                                                                    <a class="dropdown-item" href="../../../projects/event-manager.html">Event Manager</a>
+                                                                    <a class="dropdown-item" href="../../../projects/inflector.html">Inflector</a>
+                                                                    <a class="dropdown-item" href="../../../projects/instantiator.html">Instantiator</a>
+                                                                    <a class="dropdown-item" href="../../../projects/lexer.html">Lexer</a>
+                                                                    <a class="dropdown-item" href="../../../projects/migrations.html">Migrations</a>
+                                                                    <a class="dropdown-item" href="../../../projects/mongodb-odm.html">MongoDB ODM</a>
+                                                                    <a class="dropdown-item" href="../../../projects/orm.html">ORM</a>
+                                                                    <a class="dropdown-item" href="../../../projects/phpcr-odm.html">PHPCR ODM</a>
+                                                                    <a class="dropdown-item" href="../../../projects/persistence.html">Persistence</a>
+                                                                    <a class="dropdown-item" href="../../../projects/rst-parser.html">RST Parser</a>
+                                                                <a class="dropdown-item bg-secondary text-white font-weight-bold" href="../../../projects.html">View All</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="../../../contribute/index.html" id="navbarDevelopmentDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Development</a>
+
+                            <div class="dropdown-menu" aria-labelledby="navbarContributeDropdown">
+                                <a class="dropdown-item" href="../../../community/index.html">Community</a>
+                                <a class="dropdown-item" href="../../../contribute/index.html">Contributor Workflow</a>
+                                <a class="dropdown-item" href="../../../contribute/maintainer/index.html">Maintainer Workflow</a>
+                                <a class="dropdown-item" href="../../../contribute/website/index.html">Contribute to Website</a>
+                                <a class="dropdown-item" href="../../../policies.html">Policies</a>
+                                <a class="dropdown-item" href="https://github.com/doctrine" target="_blank" rel="noopener noreferrer">GitHub</a>
+                                <a class="dropdown-item" href="../../../styleguide.html">Styleguide</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="../../../sponsorship.html">Sponsorship</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="../../../partners.html">Partners</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="../../../blog/index.html">Blog</a>
+                        </li>
+                    </ul>
+
+                    <div class="layout-edit-button d-inline-block mr-2">
+                                                    <a href="https://github.com/doctrine/doctrine-website/edit/master/source/blog/2010-07-19-your-own-orm-doctrine2.md" class="btn btn-light" target="_blank" rel="noopener noreferrer">Edit</a>
+                                            </div>
+                </div>
+                <div class="nav-outbound">
+                    <div id="search-box">
+                        <!-- SearchBox widget will appear here -->
+                    </div>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+            </nav>
+
+            <div class="search-results rounded">
+                <div id="hits">
+                    <!-- Hits widget will appear here -->
+                </div>
+
+                <a href="https://www.algolia.com/" target="_blank" rel="noopener noreferrer"><img src="../../../images/search-by-algolia.png" class="float-right" style="width: 150px;" /></a>
+            </div>
+        
+            <main role="main" class="container-wrapper container">
+            <article>
+        <div class="row">
+            <div class="col-lg-8 col-12">
+                <header>
+                    <h2>Write your own ORM on top of Doctrine2</h2>
+                </header>
+
+                <p class="lead">
+                    Posted on <date>July 19, 2010</date>
+                                            by
+                                                    beberlei
+                                                            </p>
+            </div>
+
+            <div class="col-lg-4 col-12">
+                <script async type="text/javascript" src="../../../../cdn.carbonads.com/carbonc118.js?serve=CK7D553W&amp;placement=wwwdoctrine-projectorg" id="_carbonads_js"></script>
+            </div>
+        </div>
+
+        <hr />
+
+        <div>
+                <p><strong>NOTE</strong></p>
+<blockquote>
+<p>The Doctrine ActiveEntity Extension is just an experiment, nothing
+that will be developed much further from the Doctrine Dev Team. It is
+only a show-case for what is possible with Doctrine2. Please feel free
+to take the code and develop it further.</p>
+</blockquote>
+<p>Did you feel the urge to write your own Object-Relational Mapper after
+reading Martin Fowlers PoEAA? I am guilty to have tried implementing two
+different ORMs on my own, both now safely dumped into the trash.</p>
+<p>In isolation each ORM pattern is easy to describe, understand and even
+implement. However the combination of a large set of patterns into a
+single implementation introduces a lot of hard to solve complexity in
+your code. Even simple Object-Relational-Mappers require a lot of
+patterns to become useful: Metadata Mapping, Identity Map, Foreign Key
+Mapping, Association Table Mapping and Query Object. Implementations
+with more features at least need the UnitOfWork and probably many more,
+for example handling inheritance, locking, value objects and such.</p>
+<p>Doctrine2 already solves a lot of the head aching problems in a
+consistent approach. We have been working on this project for almost 2
+years now, with all the experience we gained implementing Doctrine 1.
+Additionally we make use of well-understood concepts from other ORM
+implementations across various languages.</p>
+<p>We as developers think that Doctrine2 responsibilities are very well
+separated such that you can exchange larger parts of the Doctrine2 core
+without having to re-implement everything. So if you ever feel inspired
+to implement your own ORM, we would be happy to offer you Doctrine2 as a
+foundation to build upon.</p>
+<p>There are examples of other ORMs that have taken the re-use instead of
+re-implement road. For example the <a href="http://www.grails.org/GORM">Groovy Grails
+ORM</a> is an ActiveRecord implementation on
+top of the popular Hibernate Java ORM. Since Groovy is a
+java-virtual-machine language it can safely use the Hibernate ORM as a
+dependent library.</p>
+<p>This article will describe some possible extensions and show where you
+can hook into the Doctrine2 core to implement your own ORM. The article
+will be very code focused and also comes with a <a href="https://github.com/beberlei/Doctrine-ActiveEntity">Github
+project</a> where all the
+code and some tests are hosted.</p>
+<h1>Doctrine2 and ActiveRecord</h1>
+<p>Doctrine2 is implementing the DataMapper pattern, however many
+programmers think ActiveRecord is better for various reasons. For me
+data-mappers are superiour to ActiveRecord, however I do understand why
+ActiveRecord is so popular: Its very easy to get started and do cool
+stuff with it! If you want Doctrine2 to be ActiveRecord you can have it.
+Actually it is very easy to turn it into a powerful ActiveRecord
+implementation, keeping all the powerful features such as DQL.</p>
+<p>Some while ago Jonathan already released his approach, called the
+&quot;ActiveEntity&quot; extension. Its a single abstract php class that your
+entities have to implement, the code is still <a href="http://trac.doctrine-project.org/browser/extensions/ActiveEntity/branches/2.0-1.0/DoctrineExtensions/ActiveEntity.php">in our SVN
+repository</a>.
+However a more recent version of this code is available as <a href="https://github.com/beberlei/Doctrine-ActiveEntity">a project on
+Github</a>. I won't
+support this experiment any further, I hope somebody picks it up and
+starts maintaining it.</p>
+<p>With Jonathans old code, to allow active record entities, you have to
+bootstrap the ActiveEntity by passing a static EntityManager:</p>
+<pre><code class="language-{.sourceCode">&lt;?php
+\DoctrineExtensions\ActiveEntity::setEntityManager($em);</code></pre>
+<p>Now say we have a User Entity (using Jonathans old ActiveEntity):</p>
+<pre><code class="language-{.sourceCode">&lt;?php
+namespace Entities;
+
+use DoctrineExtensions\ActiveEntity;
+
+/** @Entity */
+class User extends ActiveEntity
+{
+    /** @Id @GeneratedValue @column(type="integer") */
+    private $id;
+
+    /** @Column(type="string") */
+    private $name;
+}</code></pre>
+<p>With PHP 5.3 late-static binding functionality we can now access the
+<code>EntityRepository</code>, a finder object for entities using a Ruby on
+Rails'ish notation:</p>
+<pre><code class="language-{.sourceCode">&lt;?php
+$user = User::find($id);
+$users = User::findBy(array("name" =&gt; "beberlei"));
+$beberlei = User::findOneBy(array("name" =&gt; "beberlei"));</code></pre>
+<p>The code to allow this functionality is very simple:</p>
+<pre><code class="language-{.sourceCode">&lt;?php
+public static function __callStatic($method, $arguments)
+{
+    return call_user_func_array(array(self::$_em-&gt;getRepository(get_called_class()), $method), $arguments);
+}</code></pre>
+<p>There are also some additional methods on the <code>ActiveEntity</code> class that
+use magic <strong>get and</strong>set and __call methods to access the private
+properties of an Entity (such as the User id and name shown above).
+Additionally you can call save() or remove() on any instance.</p>
+<p>For starters this offers a great ActiveRecord implementation with all
+the powerful features that Doctrine2 offers, such as DQL and UnitOfWork.
+However we can still go much further:</p>
+<ul>
+<li>Eliminate the need to define ActiveEntity properties by metadata
+mapping inference</li>
+<li>Adding your own powerful Metadata Mapping Layer</li>
+<li>Add a Doctrine 1.2 behaviour system using the PHP 5.3.99DEV Traits
+functionalitiy</li>
+<li>Add validation to properties of an ActiveEntity</li>
+</ul>
+<p>Lets begin with a simple introduction to the Doctrine Metadata Model to
+explain how this is all possible.</p>
+<h1>Doctrine2 Metadata Model</h1>
+<p>You probably already saw that Doctrine2 offers many different metadata
+configuration mechanisms: Annotations, YAML, XML and plain PHP. Any one
+of this implementations will transform into an instance of
+<code>Doctrine\ORM\ClassMetadata</code> which is then cached for subsequent web
+requests. The <code>ClassMetadataFactory</code> is responsible for creating and
+managing those metadata instances.</p>
+<p>Doctrine2 uses the <code>ClassMetadata</code> instance internally for all runtime
+access to your entities metadata, which means that you have to extend
+this class such that it works exactly the same from the outside.</p>
+<p>If you wanted to extend the inner workings of Doctrine2, this is indeed
+the way to go. First extend the EntityManager to replace the
+<code>ClassMetadataFactory</code> used. This piece of code is the only hackish
+workaround, everything else is rather nice :-)</p>
+<pre><code class="language-{.sourceCode">&lt;?php
+namespace DoctrineExtensions\ActiveEntity;
+
+use DoctrineExtensions\ActiveEntity\Mapping\ClassMetadataFactory;
+
+class ActiveEntityManager extends \Doctrine\ORM\EntityManager
+{
+    protected function __construct(Connection $conn, Configuration $config, EventManager $eventManager)
+    {
+        parent::__construct($conn, $config, $eventManager);
+
+        $metadataFactory = new ActiveClassMetadataFactory($this);
+        $metadataFactory-&gt;setCacheDriver($this-&gt;getConfiguration()-&gt;getMetadataCacheImpl());
+
+        // now this is the only hack required to get it work:
+        $reflProperty = new \ReflectionProperty('Doctrine\ORM\EntityManager', 'metadataFactory');
+        $reflProperty-&gt;setAccessible(true);
+        $reflProperty-&gt;setValue($this, $metadataFactory);
+    }
+
+    public static function create($conn, Configuration $config, EventManager $eventManager = null)
+    {
+        // ... copy paste from EntityManager::create()
+
+        return new ActiveEntityManager($conn, $config, $conn-&gt;getEventManager());
+    }
+}</code></pre>
+<p>And both the <code>ClassMetadataFactory</code> and <code>ClassMetadata</code>:</p>
+<pre><code class="language-{.sourceCode">&lt;?php
+namespace DoctrineExtensions\ActiveEntity\Mapping;
+
+class ActiveClassMetadataFactory extends \Doctrine\ORM\Mapping\ClassMetadataFactory
+{
+    protected function _newClassMetadataInstance($className)
+    {
+        return new ActiveClassMetadata($className);
+    }
+}
+
+class ActiveClassMetadata extends \Doctrine\ORM\Mapping\ClassMetadata
+{
+}</code></pre>
+<p>This is the foundation of your own Doctrine2-based ORM. We will see in
+the next section how we can use this.</p>
+<h1>Exchange Doctrine2 Reflection for Array-based Field Storage</h1>
+<p>Doctrine2 uses reflection to access the current values of an entity.
+This is necessary, because Doctrine2 is a Data Mapper that enforces
+clean separation between entities and persistence. If we extend it to be
+an ActiveRecord implementation this separation is not wanted anymore and
+we can opt for a new approach, using the get()/set() methods on our
+ActiveEntities.</p>
+<p>Defining the properties &quot;id&quot; and &quot;name&quot; will then not be necessary
+anymore, they will all be saved in an array hash-map called &quot;_data&quot;
+inside the ActiveEntity. We cannot use annotations for metadata anymore,
+however the XML or YAML drivers would still work smoothly.</p>
+<p>To get started we have to modify our <code>ActiveClassMetadata</code> a bit to
+exchange the contents of reflClass and reflFields with our own classes.
+Looking at the <code>ClassMetadata</code> code and doing some project wide searches
+I found out about all the necessary changes. To replace the
+<code>ReflectionClass</code> we only need to exchange <code>getProperty</code> and keep the
+rest. To exchange <code>ReflectionProperty</code> we only have to overwrite
+<code>setAccessible()</code>, <code>getValue()</code> and <code>setValue()</code>.</p>
+<pre><code class="language-{.sourceCode">&lt;?php
+namespace DoctrineExtensions\ActiveEntity\Reflection;
+
+class ActiveEntityReflectionClass extends \ReflectionClass
+{
+    public function getProperty($name)
+    {
+        return new ActiveEntityPropertyReflection($this-&gt;name, $name);
+    }
+}
+
+class ActiveEntityReflectionProperty
+{
+    public $name = null;
+    public $class = null;
+
+    public function __construct($class, $name)
+    {
+        $this-&gt;class = $class;
+        $this-&gt;name = $name;
+    }
+
+    public function setAccessible($flag) {}
+
+    public function setValue($entity = null, $value = null)
+    {
+        $entity-&gt;set($this-&gt;name, $value);
+    }
+
+    public function getValue($entity = null)
+    {
+        return $entity-&gt;get($this-&gt;name);
+    }
+}</code></pre>
+<p>This is about enough to exchange reflection transformation against a
+simple ActiveRecord get/set approach. Now we need to replace the all the
+instantiations of <code>ReflectionClass</code> relevant for runtime mapping with
+our implementation:</p>
+<pre><code class="language-{.sourceCode">&lt;?php
+namespace DoctrineExtensions\ActiveEntity\Mapping;
+
+use DoctrineExtensions\ActiveEntity\Reflection\ActiveEntityReflectionClass;
+use DoctrineExtensions\ActiveEntity\Reflection\ActiveEntityReflectionProperty;
+
+class ActiveClassMetadata extends \Doctrine\ORM\Mapping\ClassMetadata
+{
+    public function __construct($entityName)
+    {
+        parent::__construct($entityName);
+        $this-&gt;reflClass = new ActiveEntityReflectionClass($entityName);
+        $this-&gt;namespace = $this-&gt;reflClass-&gt;getNamespaceName();
+        $this-&gt;table['name'] = $this-&gt;reflClass-&gt;getShortName();
+    }
+
+    /**
+     * Restores some state that can not be serialized/unserialized.
+     *
+     * @return void
+     */
+    public function __wakeup()
+    {
+        // lots of code here, see the Github Repository
+    }
+}</code></pre>
+<p>Again, this is enough and our ActiveEntity Mapping now works. We can
+heavily modify the <code>ActiveEntity</code> now to loose the requirement to
+specify properties for the defined metadata. We can rewrite the User
+entity to be:</p>
+<pre><code class="language-{.sourceCode">&lt;?php
+namespace Entities;
+
+use DoctrineExtensions\ActiveEntity\ActiveEntity;
+
+class User extends ActiveEntity
+{
+}</code></pre>
+<p>Using an XML or YAML Mapping is already enough for this ActiveEntity to
+work out of the box.</p>
+<h1>Implementing your own Metadata Mapping Driver</h1>
+<p>In the spirit of Doctrine 1.* or GORM there should be a PHP based
+metadata mapping driver now and actually Doctrine2 ships with one
+already:</p>
+<pre><code class="language-{.sourceCode">&lt;?php
+$config = new \Doctrine\ORM\Configuration();
+$config-&gt;setMetadataDriverImpl(new \Doctrine\ORM\Mapping\Driver\StaticPHPDriver());
+// ...</code></pre>
+<p>This allows to specify the metadata within the User class:</p>
+<pre><code class="language-{.sourceCode">&lt;?php
+namespace Entities;
+
+use DoctrineExtensions\ActiveEntity\ActiveEntity;
+use DoctrineExtensions\ActiveEntity\Mapping\ActiveClassMetadata;
+
+class User extends ActiveEntity
+{
+    static public function loadMetadata(ActiveClassMetadata $cm)
+    {
+        // work with $cm here!
+    }
+}</code></pre>
+<p>You could extend that Static PHP Driver even more for the next section.
+We could add additional metadata information, such as names of
+behaviours to extend or validators or anything else.</p>
+<h1>Using Traits for Behaviours</h1>
+<p>We want to add a simple &quot;Timestampable&quot; behaviour now, hooking into the
+<code>loadClassMetadata</code> event <a href="../../../projects/orm/2.0/docs/reference/events/en.html#load-classmetadata-event">as described in the
+documentation</a>:</p>
+<p>Now this is untested code, as i don't have a PHP-5.3.99-DEV version
+compiled at this machine.</p>
+<p>The following trait can be used by our <code>User</code> entity:</p>
+<pre><code class="language-{.sourceCode">&lt;?php
+namespace DoctrineExtensions\ActiveEntity\Behaviour;
+
+trait Timestampable
+{
+    public function created()
+    {
+        return $this-&gt;get('created');
+    }
+
+    public function updated()
+    {
+        return $this-&gt;get('updated');
+    }
+
+    /** will be a prePersist lifecycle hook */
+    public function setCreated()
+    {
+        return $this-&gt;set('created', new \DateTime("now"));
+    }
+
+    /** will be a preUpdate lifecycle hook */
+    public function setUpdated()
+    {
+        return $this-&gt;set('updated', new \DateTime("now"));
+    }
+}
+
+class User extends ActiveEntity use Timestampable
+{
+
+}</code></pre>
+<p>We now need an Event that modifies the <code>ActiveClassMetadata</code> as
+required:</p>
+<pre><code class="language-{.sourceCode">&lt;?php
+namespace DoctrineExtensions\ActiveEntity\Behaviour;
+
+use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
+
+class TimestampableEvent
+{
+    public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
+    {
+        $classMetadata = $eventArgs-&gt;getClassMetadata();
+        $traits = $classMetadata-&gt;reflClass-&gt;getTraitNames();
+        if (!in_array("DoctrineExtensions\ActiveEntity\Behaviour\Timestampable", $traits)) {
+            return;
+        }
+
+        $classMetadata-&gt;mapField(array(
+            'type' =&gt; 'datetime',
+            'fieldName' =&gt; 'created',
+        ));
+        $classMetadata-&gt;mapField(array(
+            'type' =&gt; 'datetime',
+            'fieldName' =&gt; 'updated',
+        ));
+        $classMetadata-&gt;addLifecycleCallback("prePersist", "setCreated");
+        $classMetadata-&gt;addLifecycleCallback("prePersist", "setUpdated");
+        $classMetadata-&gt;addLifecycleCallback("preUpdate", "setUpdated");
+    }
+}</code></pre>
+<p>You can now register this behaviour with your Entity Manager and just
+the usage of the trait <code>Timestampable</code> adds two additional fields and
+updates them accordingly.</p>
+<blockquote>
+<p><strong>NOTE</strong></p>
+<p>Again, the trait code is untested. It should work, but I cannot
+guarantee! :)</p>
+</blockquote>
+<h1>Conclusion</h1>
+<p>What are you waiting for? This article showed a very deep modification
+of the Doctrine2 core to turn it into Active Record. The changes
+required some understanding of the inner workings of Doctrine2, however
+not many changes were required in the end.</p>
+<p><a href="https://github.com/beberlei/Doctrine-ActiveEntity">See the code on
+GitHub!</a></p>
+        </div>
+    </article>
+    </main>
+
+        <button id="back-to-top" title="Go to top">Top</button>
+
+                
+        <script id="instantsearch-template" type="text/template">
+            
+    <a href="{{url}}" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{{_highlightResult.projectName.value}}}: {{{_highlightResult.h1.value}}}</h5>
+        </div>
+
+        {{#h2}}
+            <p class="mb-1">
+                <i class="far fa-arrow-alt-circle-right text-primary"></i>
+
+                {{{_highlightResult.h2.value}}}
+
+                {{#h3}}
+                    > {{{_highlightResult.h3.value}}}
+                {{/h3}}
+
+                {{#h4}}
+                    > {{{_highlightResult.h4.value}}}
+                {{/h4}}
+
+                {{#h5}}
+                    > {{{_highlightResult.h5.value}}}
+                {{/h5}}
+            </p>
+        {{/h2}}
+
+        {{#content}}
+            <div class="content p-2 rounded" style="background-color: rgba(0,0,0,.125);">
+                {{{_highlightResult.content.value}}}
+            </div>
+        {{/content}}
+    </a>
+
+        </script>
+
+        <script
+            src="../../../frontend/js/bundle622f.js?ff3b61"
+                            
+                        >
+        </script>
+
+                
+        <script type="text/javascript">
+            var projectSlug = '';
+            var versionSlug = 'latest';
+
+            var searchBoxSettings = {
+                container: '#search-box',
+                placeholder: 'Search'
+            };
+
+            function googleAnalyticsEvent(eventCategory, eventAction, eventLabel, eventValue, fieldsObject) {
+                                ga('send', 'event', eventCategory, eventAction, eventLabel, eventValue, fieldsObject);
+                            }
+        </script>
+
+        
+                    <script type="text/javascript">
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','../../../../www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-288343-7', 'auto');
+                ga('send', 'pageview');
+            </script>
+        
+            <script
+            src="../../../frontend/js/prismjs1a47.js?0b6349"
+                            
+                        >
+    </script>
+    </body>
+
+<!-- Mirrored from www.doctrine-project.org/2010/07/19/your-own-orm-doctrine2.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Sep 2024 17:14:34 GMT -->
+</html>
